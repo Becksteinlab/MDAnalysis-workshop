@@ -86,13 +86,23 @@ reflected in your real home directory, including deletion of files!
    directories in the VM so the virtual machine is not recommended for
    production analysis.)
 
-Within the VM you can then use MDAnlysis. For instance, start ipython_::
+Within the VM you can then use MDAnlysis. For instance, start
+ipython_::
+
   ipython
 
-Within ``ipython`` (you can copy and paste line-by-line for
-interactive exploration or copy and the use ``%paste`` in
-``ipython``)::
-  
+Within ``ipython`` try out the following example. You can 
+
+* copy and paste line-by-line for interactive exploration, or 
+* copy and then use ``%paste`` in ``ipython``, or
+* save it to a file ``example.py`` and run with ``%run
+  example.py``
+
+Simple analysis (end-to-end distance and radius of gyration) of a
+protein (closed-to-open transition of adenylate kinase)::
+
+  # example.py
+    
   import MDAnalysis
   from MDAnalysis.tests.datafiles import PSF, DCD
   import numpy.linalg
