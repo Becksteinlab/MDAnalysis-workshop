@@ -5,10 +5,6 @@
 This directory contains the set up for virtual machines (VM) using
 Vagrant_ with VirtualBox_
 
-.. _Vagrant: https://www.vagrantup.com/
-.. _VirtualBox: https://www.virtualbox.org/
-.. _ipython: http://ipython.org/
-
 You first need to install VirtualBox_ and Vagrant_ --- either through
 your package manager or by downloading the appropriate packages from
 their websites.
@@ -18,10 +14,35 @@ Linux machine that will automatically install itself with
 MDAnalysis. For the following to work, you will need an internet
 connection.
 
+.. _Vagrant: https://www.vagrantup.com/
+.. _VirtualBox: https://www.virtualbox.org/
+.. _ipython: http://ipython.org/
+.. _MDAnalysisTutorial repository:
+   https://github.com/orbeckst/MDAnalysisTutorial/ 
+
+
+Getting the MDAnalysis VM
+=========================
+
+Clone the `MDAnalysisTutorial repository`_ from github::
+
+  git clone https://github.com/orbeckst/MDAnalysisTutorial.git
+
+The VMs are in the ``vm`` sub-directory ::
+
+  cd  MDAnalysisTutorial/vm/
+
+To select a VM, ``cd`` into the specific directory, e.g. for a recent
+Ubuntu VM::
+
+  cd Ubuntu/14.04
+  
+
+
 Start/stop VM
 =============
 
-For example, Ubuntu 14.04::
+In the following, we are using an Ubuntu 14.04 VM::
   
   cd Ubuntu/14.04
   vagrant up
@@ -33,13 +54,16 @@ installed from the internet.
 The next time you run ``vagrant up`` it will be much faster.
 
 You can suspend the VM (saving its instantaneous state)::
+
   vagrant suspend
+
 or you can shut it down ::
+
   vagrant halt
+
 (Then the next ``up`` will boot up the VM.)
 
-.. Warning:: 
-   If you want to start completely fresh, run ``vagrant destroy``.
+.. Warning:: If you want to start completely fresh, run ``vagrant destroy``.
 
 
 Working with the VM
