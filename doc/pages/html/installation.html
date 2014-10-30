@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installing MDAnalysis &mdash; MDAnalysis Tutorial 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
+    <link rel="top" title="MDAnalysis Tutorial 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="Preparations" href="preparations.html" />
+    <link rel="prev" title="MDAnalysis Tutorial" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="preparations.html" title="Preparations"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="MDAnalysis Tutorial"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">MDAnalysis Tutorial 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mdanalysis-logo-200x150.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installing MDAnalysis</a><ul>
+<li><a class="reference internal" href="#installation-methods">Installation methods</a><ul>
+<li><a class="reference internal" href="#local-installation">Local installation</a></li>
+<li><a class="reference internal" href="#virtual-machine">Virtual machine</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing-the-installation">Testing the installation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">MDAnalysis Tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="preparations.html"
+                        title="next chapter">Preparations</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/installation.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installing-mdanalysis">
+<h1>Installing MDAnalysis<a class="headerlink" href="#installing-mdanalysis" title="Permalink to this headline">¶</a></h1>
+<p>Before you can start the tutorial, you need a working installation of
+<a class="reference external" href="http://mdanalysis.googlecode.com">MDAnalysis</a> (with its test suite, <a class="reference external" href="https://code.google.com/p/mdanalysis/wiki/UnitTests">MDAnalysisTests</a>) on your Linux of Mac
+OS X machine. The following contains hints and links to further
+documentation to facilitate installation of the package. In an ideal
+setting (development tools (gcc tool chain), python development
+headers, full scientific Python stack with numpy, scipy, matplotlib
+already installed, working netcdf/HDF5 library), installation will be
+as simple as</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install --user MDAnalysis MDAnalysisTests
+</pre></div>
+</div>
+<p>In a less ideal setting, one typically has to install additional
+packages through the distribution&#8217;s package manager as described in
+the links under <a class="reference internal" href="#local-installation"><em>Local installation</em></a>. Alternatively, for this
+tutorial one can also set up a Linux <a class="reference internal" href="#virtual-machine"><em>Virtual machine</em></a> that
+installs itself with everything needed and the most recent release of
+MDAnalysis.</p>
+<div class="section" id="installation-methods">
+<h2>Installation methods<a class="headerlink" href="#installation-methods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="local-installation">
+<span id="id1"></span><h3>Local installation<a class="headerlink" href="#local-installation" title="Permalink to this headline">¶</a></h3>
+<p>The latest release of <a class="reference external" href="http://mdanalysis.googlecode.com">MDAnalysis</a> (and the full test suite) can be
+installed from the python package index with <a class="reference external" href="http://www.pip-installer.org/en/latest/index.html">pip</a> or <a class="reference external" href="http://packages.python.org/distribute/easy_install.html">easy_install</a>:</p>
+<div class="highlight-python"><div class="highlight"><pre>pip install --user MDAnalysis MDAnalysisTests
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-python"><div class="highlight"><pre>easy_install --user MDAnalysis MDAnalysisTests
+</pre></div>
+</div>
+<p>(Installation of the test suite is required for this tutorial because
+we will use some of the data files that are part of the tests.)</p>
+<p>If there are problems then please have a closer look at the
+<a class="reference external" href="https://code.google.com/p/mdanalysis/wiki/Install">installation notes</a> and the <a class="reference external" href="https://code.google.com/p/mdanalysis/wiki/InstallRecipes">installation recipes</a>; in particular,
+<a class="reference external" href="https://code.google.com/p/mdanalysis/wiki/netcdf">installing the netcdf library</a> can become more involved.</p>
+<p>If you need help with installation issues, please do not hesitate to
+ask on the <a class="reference external" href="http://groups.google.com/group/mdnalysis-discussion">user discussion group</a>.</p>
+<p>For this tutorial you can also alternatively use a complete
+installation inside a <a class="reference internal" href="#virtual-machine"><em>Virtual machine</em></a>.</p>
+</div>
+<div class="section" id="virtual-machine">
+<span id="id2"></span><h3>Virtual machine<a class="headerlink" href="#virtual-machine" title="Permalink to this headline">¶</a></h3>
+<p>The directory <tt class="docutils literal"><span class="pre">vm</span></tt> contains configuration files for <a class="reference external" href="https://www.vagrantup.com/">vagrant</a>
+virtual machines (VM) (using <a class="reference external" href="https://www.virtualbox.org/">VirtualBox</a>). The file <tt class="docutils literal"><span class="pre">vm/README.rst</span></tt>
+describes setup in more detail but provided that <a class="reference external" href="https://www.vagrantup.com/">vagrant</a> and
+<a class="reference external" href="https://www.virtualbox.org/">VirtualBox</a> are installed, the following should provide you with a
+working VM:</p>
+<div class="highlight-python"><div class="highlight"><pre>cd vm/Ubuntu/14.04
+vagrant up
+vagrant ssh
+</pre></div>
+</div>
+<p>When you are done, just exit the ssh session (<tt class="docutils literal"><span class="pre">exit</span></tt> or Control-D)
+and halt the VM:</p>
+<div class="highlight-python"><div class="highlight"><pre>vagrant halt
+</pre></div>
+</div>
+<p>You can access your real home directory (<span class="target" id="index-0"></span><tt class="xref std std-envvar docutils literal"><span class="pre">$HOME</span></tt>) in the virtual
+machine at the path <tt class="docutils literal"><span class="pre">/myhome</span></tt>. Anything that you do in this
+directory will be reflected in your real home directory, including
+deletion of files!</p>
+</div>
+</div>
+<div class="section" id="testing-the-installation">
+<h2>Testing the installation<a class="headerlink" href="#testing-the-installation" title="Permalink to this headline">¶</a></h2>
+<p>MDAnalysis comes with over 700 <a class="reference external" href="https://code.google.com/p/mdanalysis/wiki/UnitTests">test cases</a> that check its
+functionality. These test cases can be run with the command</p>
+<div class="highlight-python"><div class="highlight"><pre>python -c &#39;from MDAnalysis.tests import test; test(label=&quot;full&quot;, verbose=3, extra_argv=[&quot;--exe&quot;])&#39;
+</pre></div>
+</div>
+<p>This can take a few minutes. Ideally, you should only get passing
+tests (&#8220;ok&#8221; or just a single dot &#8221;.&#8221; when using <tt class="code docutils literal"><span class="pre">verbose=1</span></tt>) or
+&#8220;KnownFailures&#8221;.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The test suite consumes a considerable amount of memory (&gt; 4GB) and
+thus it might fail or become very slow on machines with
+insufficient memory such as a <a class="reference internal" href="#virtual-machine"><em>Virtual machine</em></a>. (This is a known
+problem with the test suite and will be addressed in the future.)</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="preparations.html" title="Preparations"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="MDAnalysis Tutorial"
+             >previous</a> |</li>
+        <li><a href="index.html">MDAnalysis Tutorial 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

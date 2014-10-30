@@ -1,0 +1,385 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Trajectory analysis &mdash; MDAnalysis Tutorial 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
+    <link rel="top" title="MDAnalysis Tutorial 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="Intermediate Level MDAnalysis hacks" href="intermediate.html" />
+    <link rel="prev" title="Working with AtomGroups" href="atomgroups.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="intermediate.html" title="Intermediate Level MDAnalysis hacks"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="atomgroups.html" title="Working with AtomGroups"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">MDAnalysis Tutorial 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mdanalysis-logo-200x150.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Trajectory analysis</a><ul>
+<li><a class="reference internal" href="#exercises-4">Exercises 4</a></li>
+<li><a class="reference internal" href="#bells-and-whistles">Bells and whistles</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="atomgroups.html"
+                        title="previous chapter">Working with AtomGroups</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="intermediate.html"
+                        title="next chapter">Intermediate Level MDAnalysis hacks</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/trajectories.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="trajectory-analysis">
+<h1>Trajectory analysis<a class="headerlink" href="#trajectory-analysis" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.Universe" title="(in MDAnalysis v0.8)"><tt class="xref py py-class docutils literal"><span class="pre">Universe</span></tt></a> binds together the
+static <strong>topology</strong> (which atoms, how are they connected, what
+un-changing properties do the atoms possess (such as partial charge),
+...) and the changing coordinate information, which is stored in the
+<strong>trajectory</strong>.</p>
+<p>The length of a trajectory (number of frames) is</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The standard way to assess each time step (or frame) in a trajectory
+is to <em>iterate</em> over the <tt class="xref py py-attr docutils literal"><span class="pre">Universe.trajectory</span></tt> attribute (which
+is an instance of <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/coordinates/base.html#MDAnalysis.coordinates.base.Reader" title="(in MDAnalysis v0.8)"><tt class="xref py py-class docutils literal"><span class="pre">Reader</span></tt></a> class):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Frame: </span><span class="si">%5d</span><span class="s">, Time: </span><span class="si">%8.3f</span><span class="s"> ps&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">time</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">&quot;Rgyr: </span><span class="si">%g</span><span class="s"> A&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">radiusOfGyration</span><span class="p">(),</span> <span class="p">))</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/coordinates/base.html#MDAnalysis.coordinates.base.Reader.time" title="(in MDAnalysis v0.8)"><tt class="xref py py-attr docutils literal"><span class="pre">time</span></tt></a> attribute
+contains the <em>current time step</em>. The
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/coordinates/base.html#MDAnalysis.coordinates.base.Reader" title="(in MDAnalysis v0.8)"><tt class="xref py py-class docutils literal"><span class="pre">Reader</span></tt></a> <strong>only contains
+information about one time step</strong>: imagine a cursor or pointer moving
+along the trajectory file. Where the cursor points, there&#8217;s you
+current coordinates, frame number, and time.</p>
+<p>Normally you will collect the data in a list or array, e.g.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Rgyr</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">protein</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;protein&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
+   <span class="n">Rgyr</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">protein</span><span class="o">.</span><span class="n">radiusOfGyration</span><span class="p">()))</span>
+<span class="n">Rgyr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Rgyr</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It is important to note that the coordinates and related properties
+calculated from the coordinates such as the radius of gyration
+<em>change</em> while selections such as <tt class="code docutils literal"><span class="pre">protein</span></tt> in the example do
+not change when moving through a trajectory: You can define the
+selection <em>once</em> and the recalculate the property of interest for
+each frame of the trajectory.</p>
+</div>
+<p>The data can be plotted to give the graph below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># quick plot</span>
+<span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">Rgyr</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">Rgyr</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;r--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">r&quot;$R_G$&quot;</span><span class="p">)</span>
+<span class="n">xlabel</span><span class="p">(</span><span class="s">&quot;time (ps)&quot;</span><span class="p">)</span>
+<span class="n">ylabel</span><span class="p">(</span><span class="s">r&quot;radius of gyration $R_G$ ($\AA$)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What does the shape of the <span class="math">\(R_G(t)\)</span> time series indicate?</p>
+<a class="reference internal image-reference" href="_images/Rgyr.svg"><div align="center" class="align-center"><img src="_images/Rgyr.svg" width="40%" /></div>
+</a>
+<div class="section" id="exercises-4">
+<h2>Exercises 4<a class="headerlink" href="#exercises-4" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Take the functions to calculate <span class="math">\(\theta_\text{NMP}\)</span> and
+<span class="math">\(\theta_\text{LID}\)</span></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="k">def</span> <span class="nf">theta_NMP</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the NMP-CORE angle for E. coli AdK in degrees&quot;&quot;&quot;</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 115:125 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfGeometry</span><span class="p">()</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 90:100 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfGeometry</span><span class="p">()</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 35:55 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfGeometry</span><span class="p">()</span>
+    <span class="n">BA</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span>
+    <span class="n">BC</span> <span class="o">=</span> <span class="n">C</span> <span class="o">-</span> <span class="n">B</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">BA</span><span class="p">,</span> <span class="n">BC</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">BA</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">BC</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">theta_LID</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the LID-CORE angle for E. coli AdK in degrees&quot;&quot;&quot;</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 179:185 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfGeometry</span><span class="p">()</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 115:125 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfGeometry</span><span class="p">()</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 125:153 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfGeometry</span><span class="p">()</span>
+    <span class="n">BA</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span>
+    <span class="n">BC</span> <span class="o">=</span> <span class="n">C</span> <span class="o">-</span> <span class="n">B</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">BA</span><span class="p">,</span> <span class="n">BC</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">BA</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">BC</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>and calculate the time series <span class="math">\(\theta_\text{NMP}(t)\)</span> and
+<span class="math">\(\theta_\text{LID}(t)\)</span>.</p>
+<p>Plot them together in one plot.</p>
+</li>
+<li><p class="first">Plot <span class="math">\(\theta_\text{NMP}(t)\)</span> against
+<span class="math">\(\theta_\text{LID}(t)\)</span>.</p>
+<p>What does the plot show?</p>
+<p>Why could such a plot be useful?</p>
+</li>
+</ol>
+<a class="reference internal image-reference" href="_images/NMP_LID_angle_projection.svg"><div align="center" class="align-center"><img src="_images/NMP_LID_angle_projection.svg" width="50%" /></div>
+</a>
+<p>The code to generate the figure contains <tt class="xref py py-func docutils literal"><span class="pre">theta_LID()</span></tt> and
+<a class="reference internal" href="atomgroups.html#theta_NMP" title="theta_NMP"><tt class="xref py py-func docutils literal"><span class="pre">theta_NMP()</span></tt></a>.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</pre></div></td><td class="code"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="k">def</span> <span class="nf">theta_NMP</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the NMP-CORE angle for E. coli AdK in degrees&quot;&quot;&quot;</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 115:125 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfGeometry</span><span class="p">()</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 90:100 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfGeometry</span><span class="p">()</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 35:55 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfGeometry</span><span class="p">()</span>
+    <span class="n">BA</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span>
+    <span class="n">BC</span> <span class="o">=</span> <span class="n">C</span> <span class="o">-</span> <span class="n">B</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">BA</span><span class="p">,</span> <span class="n">BC</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">BA</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">BC</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">theta_LID</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the LID-CORE angle for E. coli AdK in degrees&quot;&quot;&quot;</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 179:185 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfGeometry</span><span class="p">()</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 115:125 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfGeometry</span><span class="p">()</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 125:153 and (backbone or name CB)&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfGeometry</span><span class="p">()</span>
+    <span class="n">BA</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B</span>
+    <span class="n">BC</span> <span class="o">=</span> <span class="n">C</span> <span class="o">-</span> <span class="n">B</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">BA</span><span class="p">,</span> <span class="n">BC</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">BA</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">BC</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">MDAnalysis</span>
+    <span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
+    <span class="kn">import</span> <span class="nn">matplotlib</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="hll">    <span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">theta_NMP</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">theta_LID</span><span class="p">(</span><span class="n">u</span><span class="p">))</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">])</span>
+</span><span class="hll">    <span class="n">time</span><span class="p">,</span> <span class="n">NMP</span><span class="p">,</span> <span class="n">LID</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">T</span>
+</span>
+
+    <span class="c"># plotting</span>
+    <span class="n">degreeFormatter</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">FormatStrFormatter</span><span class="p">(</span><span class="s">r&quot;</span><span class="si">%g</span><span class="s">$^\circ$&quot;</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">NMP</span><span class="p">,</span> <span class="s">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">r&quot;$\theta_{\mathrm{NMP}}$&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">LID</span><span class="p">,</span> <span class="s">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">r&quot;$\theta_{\mathrm{LID}}$&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">r&quot;time $t$ (ps)&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">r&quot;angle $\theta$&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">degreeFormatter</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&quot;best&quot;</span><span class="p">)</span>
+
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">NMP</span><span class="p">,</span> <span class="n">LID</span><span class="p">,</span> <span class="s">&#39;k-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">r&quot;NMP-CORE angle $\theta_{\mathrm{NMP}}$&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">r&quot;LID-CORE angle $\theta_{\mathrm{LID}}$&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">degreeFormatter</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">degreeFormatter</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">tick_right</span><span class="p">()</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s">&quot;right&quot;</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="mf">0.12</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.88</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;svg&#39;</span><span class="p">,</span> <span class="s">&#39;pdf&#39;</span><span class="p">,</span> <span class="s">&#39;png&#39;</span><span class="p">):</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&quot;NMP_LID_angle_projection.{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ext</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<p>Note that one would normally write the code more efficiently and
+generate the atom groups once and then pass them to a simple function
+to calculate the angle</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">theta</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate the angle between BA and BC for AtomGroups A, B, C&quot;&quot;&quot;</span>
+    <span class="n">B_center</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">centroid</span><span class="p">()</span>
+    <span class="n">BA</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">centroid</span><span class="p">()</span> <span class="o">-</span> <span class="n">B_center</span>
+    <span class="n">BC</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">centroid</span><span class="p">()</span> <span class="o">-</span> <span class="n">B_center</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">BA</span><span class="p">,</span> <span class="n">BC</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">BA</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">BC</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="bells-and-whistles">
+<h2>Bells and whistles<a class="headerlink" href="#bells-and-whistles" title="Permalink to this headline">¶</a></h2>
+<p class="rubric">Quick data acquisition</p>
+<p>Especially useful for interactive analysis in <strong class="program">ipython
+&#8211;pylab</strong> using list comprehensions (implicit for loops):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">protein</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;protein&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">protein</span><span class="o">.</span><span class="n">radiusOfGyration</span><span class="p">())</span> <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">])</span>
+<span class="n">time</span><span class="p">,</span> <span class="n">RG</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">T</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">RG</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="rubric">More on the trajectory iterator</p>
+<p>One can directly <strong>jump to a frame</strong> by using &#8220;indexing syntax&#8221;:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">50</span><span class="p">]</span>
+<span class="go">&lt; Timestep 51 with unit cell dimensions array([  0.,   0.,   0.,  90.,  90.,  90.], dtype=float32) &gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span>
+<span class="go">51</span>
+</pre></div>
+</div>
+<p>You can also <strong>slice trajectories</strong>, e.g. if you want to start at the 10th
+frame and go to 10th before the end, and only use every 5th frame:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>(although doing this on Gromacs XTC and TRR trajectories is currently
+much slower than for DCDs.)</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Trajectory indexing and slicing uses 0-based indices (as in standard Python) but
+MDAnalysis numbers frames starting with 1 (for historical reasons
+and according to the practice of all MD codes).</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="intermediate.html" title="Intermediate Level MDAnalysis hacks"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="atomgroups.html" title="Working with AtomGroups"
+             >previous</a> |</li>
+        <li><a href="index.html">MDAnalysis Tutorial 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
