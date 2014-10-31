@@ -50,12 +50,16 @@ Normally you will collect the data in a list or array, e.g. ::
 The data can be plotted to give the graph below::
 
   # quick plot
-  from pylab import *
-  plot(Rgyr[:,0], Rgyr[:,1], 'r--', lw=2, label=r"$R_G$")
-  xlabel("time (ps)")
-  ylabel(r"radius of gyration $R_G$ ($\AA$)")
+  import matplotlib.pyplot as plt
+  ax = plt.subplot(111)
+  ax.plot(Rgyr[:,0], Rgyr[:,1], 'r--', lw=2, label=r"$R_G$")
+  ax.set_xlabel("time (ps)")
+  ax.set_ylabel(r"radius of gyration $R_G$ ($\AA$)")
+  ax.figure.savefig("Rgyr.pdf")
+  plt.draw()
 
-What does the shape of the :math:`R_G(t)` time series indicate?
+The :math:`R_G(t)` increases over time, indicating an opening up of
+the AdK enzyme.
 
 .. image:: /figs/Rgyr.*
    :width: 40%
@@ -158,13 +162,15 @@ frame and go to 10th before the end, and only use every 5th frame::
       print(ts.frame)
       ...
 
-(although doing this on Gromacs XTC and TRR trajectories is currently
-much slower than for DCDs.)
-
 .. Note:: 
 
    Trajectory indexing and slicing uses 0-based indices (as in standard Python) but
    MDAnalysis numbers frames starting with 1 (for historical reasons
    and according to the practice of all MD codes).
 
+.. Note::
+
+   Not all trajectory readers support direct access and arbitrary
+   slices, although many commonly ones such as DCD, XTC/TRR, and Amber
+   NETCDF do.
 
