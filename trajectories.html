@@ -126,12 +126,17 @@ current coordinates, frame number, and time.</p>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">It is important to note that the coordinates and related properties
+<p>It is important to note that the coordinates and related properties
 calculated from the coordinates such as the radius of gyration
-<em>change</em> while selections such as <tt class="code docutils literal"><span class="pre">protein</span></tt> in the example do
-not change when moving through a trajectory: You can define the
-selection <em>once</em> and the recalculate the property of interest for
-each frame of the trajectory.</p>
+<em>change</em> while <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/selections.html">selections</a> on static properties (such as
+<tt class="code docutils literal"><span class="pre">protein</span></tt> in the example) do not change when moving through a
+trajectory: You can define the selection <em>once</em> and then
+recalculate the property of interest for each frame of the
+trajectory.</p>
+<p class="last">However, if selections contain distance-dependent queries (such as
+<tt class="docutils literal"><span class="pre">around</span></tt> or <tt class="docutils literal"><span class="pre">point</span></tt>, see <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/selections.html#selection-keywords">selection keywords</a> for more
+details) then one might have to recalculate the selection for each
+time step and one would put it inside the loop over frames.</p>
 </div>
 <p>The data can be plotted to give the graph below:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># quick plot</span>
@@ -360,6 +365,13 @@ and according to the practice of all MD codes).</p>
 <p class="last">Not all trajectory readers support direct access and arbitrary
 slices, although many commonly ones such as DCD, XTC/TRR, and Amber
 NETCDF do.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">One can iterate through multiple trajectories in parallel
+with the help of <a class="reference external" href="http://docs.python.org/library/itertools.html#itertools.izip" title="(in Python v2.7)"><tt class="xref py py-func docutils literal"><span class="pre">itertools.izip()</span></tt></a> from the
+<a class="reference external" href="http://docs.python.org/library/itertools.html#module-itertools" title="(in Python v2.7)"><tt class="xref py py-mod docutils literal"><span class="pre">itertools</span></tt></a> module, which also provide other
+interesting ways to work with trajectory iterators.</p>
 </div>
 </div>
 </div>

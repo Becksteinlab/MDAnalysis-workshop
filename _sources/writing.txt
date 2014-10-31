@@ -84,17 +84,33 @@ Example: Saving dynamic per-atom properties in B-factor
 It is often very useful to project per-atom properties on the
 structure. A common approach is to save scalar values in the B-factor
 field of a PDB file and then color atoms by B-factor (also known as
-"beta" or temperature factor).
+temperature factor or just "beta").
 
-The following example computes the shift of each atom in AdK relative to a
-reference structure (after a structural superposition on the CORE
-domain) and projects it on the B-factor with the
-:meth:`MDAnalysis.core.AtomGroup.AtomGroup.set_bfactor` method. Each
-frame is written out as part of a multi-frame PDB file:
+The following example computes the shift of each atom in AdK relative
+to a reference structure (line 23). We take as reference the closed
+conformation (after a structural superposition on the CORE domain with
+:func:`~MDAnalysis.analysis.align.alignto`). The shifts are written
+into the B-factor with the
+:meth:`~MDAnalysis.core.AtomGroup.AtomGroup.set_bfactor` method of
+:class:`~MDAnalysis.core.AtomGroup.AtomGroup`. Each frame is written
+out as part of a multi-frame PDB file:
 
 .. literalinclude:: /code/bfacmovie.py
    :linenos:
+   :emphasize-lines: 22,23,25,26
 
+To visualize in VMD_, use the :ref:`pdbbfactor Tcl script <pdbbfactor-tcl-script>` below on
+the VMD Tcl commandline:
+
+.. code-block:: tcl
+
+  source pdbbfactor.tcl
+  pdbbfactor adk_distance_bfac.pdb
+
+Rendered snapshots from the beginning, middle, and end of the
+trajectroy are shown below. Note that the tip of the LID domain moves
+by almost 25 Å, which provides some justification for calling the AdK
+closed/open transition a "large conformational change".
 
 +----------------------------------------+----------------------------------------+----------------------------------------+
 | .. image:: /figs/AdK_distance_0001.*   | .. image:: /figs/AdK_distance_0040.*   | .. image:: /figs/AdK_distance_0097.*   |
@@ -106,15 +122,10 @@ frame is written out as part of a multi-frame PDB file:
 |                                        | 0 Å (blue) to 25 Å (red).              | 0 Å (blue) to 25 Å (red).              |
 +----------------------------------------+----------------------------------------+----------------------------------------+
 
+.. _pdbbfactor-tcl-script:
 
-To visualize in VMD_, use the script ``pdbbfactor.tcl`` below on the
-VMD Tcl commandline:
-
-.. code-block:: tcl
-
-  source pdbbfactor.tcl
-  pdbbfactor adk_distance_bfac.pdb
-
+.. rubric:: pdbbfactor Tcl script
+ 
 `pdbbfactor`_ was originally written by Justin Gullingsrud (2004) and
 slightly modified for this tutorial:
 

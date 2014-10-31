@@ -87,23 +87,54 @@ AdK consists of three domains:
 1. Calculate the center of mass and the center of geometry for each of
    the three domains. 
 
+        >>> domains = {
+        >>>   'CORE': u.selectAtoms("protein and (resid 1-29 or resid 60-121 or resid 160-214)"),
+        >>>   'NMP': u.selectAtoms("protein and resid 30-59"),
+	>>>   'LID': u.selectAtoms("protein and resid 122-159")
+        >>>   }
+        >>> cg = dict((name, dom.centroid()) for name,dom in domains.items())
+        >>> cm = dict((name, dom.centerOfMass()) for name,dom in domains.items())
+        >>> print(cg)
+        {'LID': array([-15.16074944,   2.11599636,  -4.37305355], dtype=float32), 
+         'CORE': array([ 4.43884087,  2.05389476,  1.63895261], dtype=float32), 
+         'NMP': array([ -2.99990702, -13.62531662,  -2.93235731], dtype=float32)}
+        >>> print(cm)
+        {'LID': array([-15.11337499,   2.12292226,  -4.40910485]), 
+         'CORE': array([ 4.564116  ,  2.08700105,  1.54992649]), 
+         'NMP': array([ -3.20330174, -13.60247613,  -3.06221538])}
+
    * What are the distances between the centers of mass? 
 
-     (Hint: you can use :func:`numpy.linalg.norm` or use a function
-     like :func:`veclength` that you defined previously)
+     (Hint: you can use :func:`numpy.linalg.norm` or calculate it
+     manually.) ::
 
-   * Does it matter to use center of mass vs center of geometry?
+        >>> from numpy.linalg import norm
+        >>> print(norm(cm['CORE'] - cm['NMP']))
+        18.1042626244
+        >>> print(norm(cm['CORE'] - cm['LID']))
+        20.5600339602
+        >>> print(norm(cm['NMP'] - cm['LID']))
+        19.7725089609
+	
+   * Does it matter to use center of mass vs center of geometry? 
+
+        >>> print(norm(cg['CORE'] - cg['NMP']))
+        17.9463
+        >>> print(norm(cg['CORE'] - cg['LID']))
+        20.501
+        >>> print(norm(cg['NMP'] - cg['LID']))
+        19.9437
+
 
 .. image:: /figs/6b_angle_def_open.*
    :width: 40%
    :align: right
 
-AdK undergoes a conformational transition during which CORE and LID
-move relative to each other. The movement can be characterized by two
-angles, :math:`\theta_\text{NMP}` and :math:`\theta_\text{LID}`, which
-are defined between the *centers of geometry* of the *backbone and*
-:math:`\text{C}_\beta` atoms between groups of residues
-[Beckstein2009]_:
+AdK undergoes a conformational transition during which the NMP and LID domain
+move relative to the CORE domain. The movement can be characterized by two
+angles, :math:`\theta_\text{NMP}` and :math:`\theta_\text{LID}`, which are
+defined between the *centers of geometry* of the *backbone and*
+:math:`\text{C}_\beta` atoms between groups of residues [Beckstein2009]_:
 
 definition of :math:`\theta_\text{NMP}`
    A: 115-125, B: 90-100, C: 35-55
@@ -125,10 +156,10 @@ The angle between vectors :math:`\vec{BA}` and :math:`\vec{BC}` is
       Calculate the NMP-CORE angle for E. coli AdK in degrees from
       :class:`~MDAnalysis.core.AtomGroup.Universe` *u*      
 
-   Use the following **incomplete** code as a starting point::
+   Use the following *incomplete* code as a starting point::
 
      import numpy as np
-     from np.linalg import norm
+     from numpy.linalg import norm
 
      def theta_NMP(u):
         """Calculate the NMP-CORE angle for E. coli AdK in degrees"""
@@ -140,9 +171,8 @@ The angle between vectors :math:`\vec{BA}` and :math:`\vec{BC}` is
         theta = np.arccos( 
         return np.rad2deg(theta)
 
-   Write the function in a file :file:`adk.py` and use
-   :program:`ipython` :code:`%run adk.py` to load the function while
-   working on it.
+   Write the function to file :file:`adk.py` and inside :program:`ipython` run
+   the file with :code:`%run adk.py` to load the function while working on it.
 
    Test it on the AdK simulation (actually, the first frame)::
      
@@ -155,6 +185,17 @@ The angle between vectors :math:`\vec{BA}` and :math:`\vec{BC}` is
   
      >>> theta_LID(u)
      107.00881
+
+(See below for a solution.)
+
+.. rubric:: Calculation of the domain angles of AdK
+
+.. literalinclude:: /code/adk.py
+   :linenos:
+   :lines: 1-23
+   
+   
+   
 
 
 .. _processing-atomgroups:
