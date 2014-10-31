@@ -63,14 +63,22 @@ installation inside a :ref:`virtual-machine`.
 .. _installation recipes: https://code.google.com/p/mdanalysis/wiki/InstallRecipes
 .. _installing the netcdf library: https://code.google.com/p/mdanalysis/wiki/netcdf
 .. _user discussion group: http://groups.google.com/group/mdnalysis-discussion
+.. _tutorial git repository: https://github.com/orbeckst/MDAnalysisTutorial
+.. _`vm/README.rst`: https://github.com/orbeckst/MDAnalysisTutorial/tree/master/vm
 
 .. _virtual-machine:
 
 Virtual machine
 ---------------
 
+You will first need to clone the `tutorial git repository`_ with
+:program:`git`::
+
+  git clone https://github.com/orbeckst/MDAnalysisTutorial.git 
+  cd MDAnalysisTutorial
+
 The directory ``vm`` contains configuration files for `vagrant`_
-virtual machines (VM) (using `VirtualBox`_). The file ``vm/README.rst``
+virtual machines (VM) (using `VirtualBox`_). The file `vm/README.rst`_
 describes setup in more detail but provided that `vagrant`_ and
 `VirtualBox`_ are installed, the following should provide you with a
 working VM::
