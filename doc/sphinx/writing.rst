@@ -96,6 +96,17 @@ frame is written out as part of a multi-frame PDB file:
    :linenos:
 
 
++----------------------------------------+----------------------------------------+----------------------------------------+
+| .. image:: /figs/AdK_distance_0001.*   | .. image:: /figs/AdK_distance_0040.*   | .. image:: /figs/AdK_distance_0097.*   |
+|    :scale: 30%                         |    :scale: 30%                         |    :scale: 30%                         |
++========================================+========================================+========================================+
+|   AdK closed conformation.             | AdK intermediate conformation, atoms   | AdK open conformation, atoms colored   |
+|                                        | colored by displacement from the closed| by displacement from the closed        |
+|                                        | conformation. Color scale ranges from  | conformation. Color scale ranges from  |
+|                                        | 0 Å (blue) to 25 Å (red).              | 0 Å (blue) to 25 Å (red).              |
++----------------------------------------+----------------------------------------+----------------------------------------+
+
+
 To visualize in VMD_, use the script ``pdbbfactor.tcl`` below on the
 VMD Tcl commandline:
 
@@ -104,7 +115,7 @@ VMD Tcl commandline:
   source pdbbfactor.tcl
   pdbbfactor adk_distance_bfac.pdb
 
-`pdbbfactor`_ was originally written by Justin Gullingsruud (2004) and
+`pdbbfactor`_ was originally written by Justin Gullingsrud (2004) and
 slightly modified for this tutorial:
 
 .. literalinclude:: /code/pdbbfactor.tcl
