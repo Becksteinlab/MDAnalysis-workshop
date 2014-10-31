@@ -157,6 +157,7 @@ The angle between vectors :math:`\vec{BA}` and :math:`\vec{BC}` is
      107.00881
 
 
+.. _processing-atomgroups:
 
 Processing AtomGroups
 =====================

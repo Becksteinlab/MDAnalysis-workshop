@@ -26,7 +26,7 @@
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
     <link rel="top" title="MDAnalysis Tutorial 0.1.0 documentation" href="index.html" />
-    <link rel="next" title="Intermediate Level MDAnalysis hacks" href="intermediate.html" />
+    <link rel="next" title="Writing coordinates" href="writing.html" />
     <link rel="prev" title="Working with AtomGroups" href="atomgroups.html" /> 
   </head>
   <body>
@@ -37,7 +37,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="intermediate.html" title="Intermediate Level MDAnalysis hacks"
+          <a href="writing.html" title="Writing coordinates"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="atomgroups.html" title="Working with AtomGroups"
@@ -48,7 +48,7 @@
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
-              <img class="logo" src="_static/mdanalysis-logo-200x150.png" alt="Logo"/>
+              <img class="logo" src="_static/mdanalysistutorial-logo-200x150.png" alt="Logo"/>
             </a></p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
@@ -63,8 +63,8 @@
   <p class="topless"><a href="atomgroups.html"
                         title="previous chapter">Working with AtomGroups</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="intermediate.html"
-                        title="next chapter">Intermediate Level MDAnalysis hacks</a></p>
+  <p class="topless"><a href="writing.html"
+                        title="next chapter">Writing coordinates</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/trajectories.txt"
@@ -135,13 +135,17 @@ each frame of the trajectory.</p>
 </div>
 <p>The data can be plotted to give the graph below:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c"># quick plot</span>
-<span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">Rgyr</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">Rgyr</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;r--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">r&quot;$R_G$&quot;</span><span class="p">)</span>
-<span class="n">xlabel</span><span class="p">(</span><span class="s">&quot;time (ps)&quot;</span><span class="p">)</span>
-<span class="n">ylabel</span><span class="p">(</span><span class="s">r&quot;radius of gyration $R_G$ ($\AA$)&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Rgyr</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">Rgyr</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s">&#39;r--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">r&quot;$R_G$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">&quot;time (ps)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">r&quot;radius of gyration $R_G$ ($\AA$)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s">&quot;Rgyr.pdf&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>What does the shape of the <span class="math">\(R_G(t)\)</span> time series indicate?</p>
+<p>The <span class="math">\(R_G(t)\)</span> increases over time, indicating an opening up of
+the AdK enzyme.</p>
 <a class="reference internal image-reference" href="_images/Rgyr.svg"><div align="center" class="align-center"><img src="_images/Rgyr.svg" width="40%" /></div>
 </a>
 <div class="section" id="exercises-4">
@@ -345,13 +349,17 @@ frame and go to 10th before the end, and only use every 5th frame:</p>
     <span class="o">...</span>
 </pre></div>
 </div>
-<p>(although doing this on Gromacs XTC and TRR trajectories is currently
-much slower than for DCDs.)</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Trajectory indexing and slicing uses 0-based indices (as in standard Python) but
 MDAnalysis numbers frames starting with 1 (for historical reasons
 and according to the practice of all MD codes).</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not all trajectory readers support direct access and arbitrary
+slices, although many commonly ones such as DCD, XTC/TRR, and Amber
+NETCDF do.</p>
 </div>
 </div>
 </div>
@@ -369,7 +377,7 @@ and according to the practice of all MD codes).</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="intermediate.html" title="Intermediate Level MDAnalysis hacks"
+          <a href="writing.html" title="Writing coordinates"
              >next</a> |</li>
         <li class="right" >
           <a href="atomgroups.html" title="Working with AtomGroups"

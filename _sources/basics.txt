@@ -154,6 +154,8 @@ Exercise 1
 Selections
 ==========
 
+.. TODO: named selections
+
 MDAnalysis comes with a fairly complete `atom selection`_
 facility. Primarily, one uses the method
 :meth:`~MDAnalysis.core.AtomGroup.Universe.selectAtoms` of a
@@ -182,7 +184,8 @@ possible to select by geometric criteria, e.g. with the :samp:`around
                    and around 4.0 ((resname LYS or resname ARG) \
                                     and not (backbone or name CB or name CG))").residues
 
-What is this selection trying to accomplish?
+This selection will find atoms potentially involved in salt bridges
+between acidic and basic residues.
 
 
 Exercises 2

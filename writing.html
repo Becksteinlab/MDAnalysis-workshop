@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Writing coordinates &mdash; MDAnalysis Tutorial 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
+    <link rel="top" title="MDAnalysis Tutorial 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="Using the MDAnalysis.analysis modules" href="analysismodule.html" />
+    <link rel="prev" title="Trajectory analysis" href="trajectories.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="analysismodule.html" title="Using the MDAnalysis.analysis modules"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="trajectories.html" title="Trajectory analysis"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">MDAnalysis Tutorial 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/mdanalysistutorial-logo-200x150.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Writing coordinates</a><ul>
+<li><a class="reference internal" href="#single-frames">Single frames</a></li>
+<li><a class="reference internal" href="#trajectories">Trajectories</a><ul>
+<li><a class="reference internal" href="#example-protein-only-trajectory">Example: Protein-only trajectory</a></li>
+<li><a class="reference internal" href="#example-saving-dynamic-per-atom-properties-in-b-factor">Example: Saving dynamic per-atom properties in B-factor</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="trajectories.html"
+                        title="previous chapter">Trajectory analysis</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="analysismodule.html"
+                        title="next chapter">Using the MDAnalysis.analysis modules</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/writing.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="writing-coordinates">
+<h1>Writing coordinates<a class="headerlink" href="#writing-coordinates" title="Permalink to this headline">¶</a></h1>
+<p>MDAnalysis also supports writing of data in a range of file formats
+(see the <a class="reference external" href="https://pythonhosted.org/MDAnalysis/documentation_pages/coordinates/init.html#id1">Table of supported coordinate formats</a> for
+details). MDAnalysis supports both <em>single frame</em> writers (such as a
+simple PDB or GRO file) and <em>trajectory</em> writers (e.g. XTC, DCD, but
+also multi-frame PDB files).</p>
+<div class="section" id="single-frames">
+<span id="writing-single-frames"></span><h2>Single frames<a class="headerlink" href="#single-frames" title="Permalink to this headline">¶</a></h2>
+<p>The most straightforward way to write to a file that can only hold a
+single frame is to use the
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.write" title="(in MDAnalysis v0.8)"><tt class="xref py py-meth docutils literal"><span class="pre">write()</span></tt></a> method of any
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="(in MDAnalysis v0.8)"><tt class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></tt></a> as already also shown under
+<a class="reference internal" href="atomgroups.html#processing-atomgroups"><em>Processing AtomGroups</em></a>. For instance, to only write out the
+protein without solvent to a file in GRO format:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">)</span>
+<span class="n">protein</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;protein&quot;</span><span class="p">)</span>
+<span class="n">protein</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;protein.gro&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>MDAnalysis uses the file suffix to determine the output file format
+(unless the <em>format</em> keyword is specified) and will raise an exception
+if it is not suitable for single frame writing.</p>
+</div>
+<div class="section" id="trajectories">
+<span id="writing-trajectories"></span><h2>Trajectories<a class="headerlink" href="#trajectories" title="Permalink to this headline">¶</a></h2>
+<p>The typical use pattern is to</p>
+<ol class="arabic simple">
+<li>Get a trajectory writer with <tt class="xref py py-func docutils literal"><span class="pre">MDAnalysis.Writer()</span></tt> (which is
+the same as <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/coordinates/core.html#MDAnalysis.coordinates.core.writer" title="(in MDAnalysis v0.8)"><tt class="xref py py-func docutils literal"><span class="pre">MDAnalysis.coordinates.core.writer()</span></tt></a>), typically
+specifying in advance how many atoms a frame will contain.</li>
+<li>Use the <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/coordinates/base.html#MDAnalysis.coordinates.base.Writer.write" title="(in MDAnalysis v0.8)"><tt class="xref py py-meth docutils literal"><span class="pre">write()</span></tt></a> method to
+write a new time step to the trajectory.</li>
+<li>Close the trajectory with
+<tt class="xref py py-meth docutils literal"><span class="pre">close()</span></tt> (although it is
+recommended to simply use the writer with the <a class="reference external" href="http://docs.python.org/reference/compound_stmts.html#with" title="(in Python v2.7)"><tt class="xref std std-keyword docutils literal"><span class="pre">with</span></tt></a>
+statement and have the context handler close the file automatically).</li>
+</ol>
+<div class="section" id="example-protein-only-trajectory">
+<h3>Example: Protein-only trajectory<a class="headerlink" href="#example-protein-only-trajectory" title="Permalink to this headline">¶</a></h3>
+<p>In practice, the second step is typically repeated in a loop as in the
+example below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">MDAnalysis</span>
+<span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PDB</span><span class="p">,</span> <span class="n">XTC</span>
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB</span><span class="p">,</span> <span class="n">XTC</span><span class="p">)</span>
+<span class="n">protein</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;protein&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="s">&quot;protein.xtc&quot;</span><span class="p">,</span> <span class="n">protein</span><span class="o">.</span><span class="n">numberOfAtoms</span><span class="p">())</span> <span class="k">as</span> <span class="n">W</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
+        <span class="n">W</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">protein</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The loop steps through the input trajectory frame by frame. The
+coordinates of the selection (the
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="(in MDAnalysis v0.8)"><tt class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></tt></a> <tt class="docutils literal"><span class="pre">protein</span></tt>) change
+accordingly and are then written as a new frame into the output
+trajectory.</p>
+<p>The output trajectory only contains the coordinates of the
+protein. For this trajectory to be useful, a protein-only topology
+file also has to be stored, as in the example under
+<a class="reference internal" href="#writing-single-frames"><em>Single frames</em></a>.</p>
+</div>
+<div class="section" id="example-saving-dynamic-per-atom-properties-in-b-factor">
+<h3>Example: Saving dynamic per-atom properties in B-factor<a class="headerlink" href="#example-saving-dynamic-per-atom-properties-in-b-factor" title="Permalink to this headline">¶</a></h3>
+<p>It is often very useful to project per-atom properties on the
+structure. A common approach is to save scalar values in the B-factor
+field of a PDB file and then color atoms by B-factor (also known as
+&#8220;beta&#8221; or temperature factor).</p>
+<p>The following example computes the shift of each atom in AdK relative to a
+reference structure (after a structural superposition on the CORE
+domain) and projects it on the B-factor with the
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_bfactor" title="(in MDAnalysis v0.8)"><tt class="xref py py-meth docutils literal"><span class="pre">MDAnalysis.core.AtomGroup.AtomGroup.set_bfactor()</span></tt></a> method. Each
+frame is written out as part of a multi-frame PDB file:</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># project a dynamic property on the structure using the B-factor field</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">MDAnalysis</span>
+<span class="kn">import</span> <span class="nn">MDAnalysis.analysis.align</span>
+
+<span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
+
+
+<span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
+<span class="n">ref</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>  <span class="c"># copy of u</span>
+
+<span class="n">CORE_selection</span> <span class="o">=</span> <span class="s">&quot;resid 1:29 or resid 60:121 or resid 160:214&quot;</span>
+<span class="n">pdbtrj</span> <span class="o">=</span> <span class="s">&quot;adk_distance_bfac.pdb&quot;</span>
+
+<span class="k">with</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Writer</span><span class="p">(</span><span class="n">pdbtrj</span><span class="p">,</span> <span class="n">multiframe</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">bonds</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">numatoms</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">numberOfAtoms</span><span class="p">())</span> <span class="k">as</span> <span class="n">PDB</span><span class="p">:</span>
+    <span class="c"># reference coordinates: set to first frame</span>
+    <span class="n">ref</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c"># iterate through our trajectory</span>
+    <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
+        <span class="c"># superimpose on the reference CORE (at t=0)</span>
+        <span class="n">rmsd</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">alignto</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="n">CORE_selection</span><span class="p">)</span>
+        <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="c"># project displacement on structure via bfactor field</span>
+        <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">set_bfactor</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+        <span class="n">PDB</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Frame {0}: CORE RMSD before/after superposition: {1[0]:.1f} / {1[1]:.1f} A. &quot;</span>
+              <span class="s">&quot;min-max displacement: {2:.1f}...{3:.1f} A&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">rmsd</span><span class="p">,</span> <span class="n">distances</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">distances</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;Wrote PDB trajectory {0} with distances in bfactor field&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pdbtrj</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><a class="first last reference internal image-reference" href="_images/AdK_distance_0001.jpg"><img alt="_images/AdK_distance_0001.jpg" src="_images/AdK_distance_0001.jpg" style="width: 160.8px; height: 165.3px;" /></a>
+</th>
+<th class="head"><a class="first last reference internal image-reference" href="_images/AdK_distance_0040.jpg"><img alt="_images/AdK_distance_0040.jpg" src="_images/AdK_distance_0040.jpg" style="width: 160.8px; height: 165.3px;" /></a>
+</th>
+<th class="head"><a class="first last reference internal image-reference" href="_images/AdK_distance_0097.jpg"><img alt="_images/AdK_distance_0097.jpg" src="_images/AdK_distance_0097.jpg" style="width: 160.8px; height: 165.3px;" /></a>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>AdK closed conformation.</td>
+<td>AdK intermediate conformation, atoms
+colored by displacement from the closed
+conformation. Color scale ranges from
+0 Å (blue) to 25 Å (red).</td>
+<td>AdK open conformation, atoms colored
+by displacement from the closed
+conformation. Color scale ranges from
+0 Å (blue) to 25 Å (red).</td>
+</tr>
+</tbody>
+</table>
+<p>To visualize in <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a>, use the script <tt class="docutils literal"><span class="pre">pdbbfactor.tcl</span></tt> below on the
+VMD Tcl commandline:</p>
+<div class="highlight-tcl"><div class="highlight"><pre><span class="nb">source</span> pdbbfactor.tcl
+<span class="nv">pdbbfactor</span> adk_distance_bfac.pdb
+</pre></div>
+</div>
+<p><a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/script_library/scripts/pdbbfactor/">pdbbfactor</a> was originally written by Justin Gullingsrud (2004) and
+slightly modified for this tutorial:</p>
+<div class="highlight-tcl"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># load multi-frame pdb file, storing B factors from each frame in user.</span>
+<span class="c"># usage: pdbbfactor &lt;filename&gt;</span>
+<span class="c"># url: http://www.ks.uiuc.edu/Research/vmd/script_library/scripts/pdbbfactor/</span>
+<span class="c">#</span>
+<span class="c"># Justin Gullingsrud</span>
+<span class="c"># 3 September 2004</span>
+<span class="c">#</span>
+<span class="c"># Oliver Beckstein, 2014-10-30</span>
+<span class="c"># updated for use with standard multipdb files which use ENDMDL as separators</span>
+<span class="c"># (END --&gt; ENDM)</span>
+
+<span class="k">proc</span> pdbbfactor <span class="k">{</span> <span class="nv">fname</span> <span class="k">}</span> <span class="k">{</span>
+  <span class="nv">mol</span> new <span class="nv">$fname</span> waitfor all
+  <span class="k">set</span> all <span class="k">[</span><span class="nv">atomselect</span> top all<span class="k">]</span>
+  <span class="k">set</span> frame <span class="mi">0</span>
+  <span class="k">set</span> <span class="ow">in</span> <span class="k">[</span><span class="nb">open</span> <span class="nv">$fname</span> r<span class="k">]</span>
+  <span class="k">set</span> beta <span class="k">{}</span>
+  <span class="k">while</span> <span class="k">{</span> <span class="k">[</span><span class="nb">gets</span> <span class="nv">$in</span> line<span class="k">]</span> <span class="o">!=</span> <span class="nv">-1</span> <span class="k">}</span> <span class="k">{</span>
+    <span class="k">switch</span> <span class="o">--</span> <span class="k">[</span><span class="nb">string</span> range <span class="nv">$line</span> <span class="mi">0</span> <span class="mi">3</span><span class="k">]</span> <span class="k">{</span>
+      <span class="nv">ENDM</span> <span class="k">{</span>
+        <span class="nv">$all</span> <span class="nv">frame</span> <span class="nv">$frame</span>
+        <span class="nv">$all</span> <span class="k">set</span> user <span class="nv">$beta</span>
+        <span class="k">set</span> beta <span class="k">{}</span>
+        <span class="nb">incr</span> frame
+      <span class="k">}</span>
+      <span class="nv">default</span> <span class="k">{</span>
+        <span class="nb">lappend</span> beta <span class="nv">$line</span>
+      <span class="k">}</span>
+    <span class="k">}</span>
+  <span class="k">}</span>
+<span class="k">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We could have also directly loaded the scalar data into the
+<tt class="docutils literal"><span class="pre">User</span></tt> field in <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a>; this is demonstrated in
+<a class="reference external" href="https://github.com/orbeckst/MDAnalysisTutorial/blob/master/doc/sphinx/code/vmduser.py">vmduser.py</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="analysismodule.html" title="Using the MDAnalysis.analysis modules"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="trajectories.html" title="Trajectory analysis"
+             >previous</a> |</li>
+        <li><a href="index.html">MDAnalysis Tutorial 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

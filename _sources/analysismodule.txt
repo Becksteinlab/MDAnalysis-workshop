@@ -1,8 +1,8 @@
 .. -*- encoding: utf-8 -*-
 
-=====================================
- Intermediate Level MDAnalysis hacks
-=====================================
+=======================================
+ Using the MDAnalysis.analysis modules
+=======================================
 
 MDAnalysis comes with a number of existing analysis code in the
 `MDAnalysis.analysis`_ module and `example scripts`_ (see also the
