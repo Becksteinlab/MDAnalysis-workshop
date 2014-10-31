@@ -41,11 +41,22 @@ Normally you will collect the data in a list or array, e.g. ::
 
    It is important to note that the coordinates and related properties
    calculated from the coordinates such as the radius of gyration
-   *change* while selections such as :code:`protein` in the example do
-   not change when moving through a trajectory: You can define the
-   selection *once* and the recalculate the property of interest for
-   each frame of the trajectory.
+   *change* while selections_ on static properties (such as
+   :code:`protein` in the example) do not change when moving through a
+   trajectory: You can define the selection *once* and then
+   recalculate the property of interest for each frame of the
+   trajectory.
 
+   However, if selections contain distance-dependent queries (such as
+   ``around`` or ``point``, see `selection keywords`_ for more
+   details) then one might have to recalculate the selection for each
+   time step and one would put it inside the loop over frames.
+
+.. _selections: 
+   http://pythonhosted.org/MDAnalysis/documentation_pages/selections.html
+
+.. _selection keywords:
+   http://pythonhosted.org/MDAnalysis/documentation_pages/selections.html#selection-keywords
 
 The data can be plotted to give the graph below::
 
@@ -174,3 +185,7 @@ frame and go to 10th before the end, and only use every 5th frame::
    slices, although many commonly ones such as DCD, XTC/TRR, and Amber
    NETCDF do.
 
+.. SeeAlso:: One can iterate through multiple trajectories in parallel
+             with the help of :func:`itertools.izip` from the
+             :mod:`itertools` module, which also provide other
+             interesting ways to work with trajectory iterators.

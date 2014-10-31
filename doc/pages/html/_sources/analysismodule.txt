@@ -18,12 +18,13 @@ the coordinate root mean square distance between two sets of
 coordinates. For example for the AdK trajectory the backbone RMSD
 between first and last frame is ::
 
-    >>> u = Universe(PSF,DCD)
+    >>> import MDAnalysis.analysis.rms
+    >>> u = MDAnalysis.Universe(PSF, DCD)
     >>> bb = u.selectAtoms('backbone')
     >>> A = bb.positions  # coordinates of first frame
     >>> u.trajectory[-1]      # forward to last frame
     >>> B = bb.positions  # coordinates of last frame
-    >>> rmsd(A,B)
+    >>> MDAnalysis.analysis.rms.rmsd(A,B)
     6.8342494129169804
 
 
@@ -39,17 +40,17 @@ The example uses files provided as part of the MDAnalysis test suite
 :data:`~MDAnalysis.tests.datafiles.PDB_small`). For all further
 examples execute first ::
 
-   >>> from MDAnalysis import Universe
-   >>> from MDAnalysis.analysis.align import *
+   >>> import MDAnalysis
+   >>> from MDAnalysis.analysis import align
    >>> from MDAnalysis.tests.datafiles import PSF, DCD, PDB_small
 
 
 In the simplest case, we can simply calculate the C-alpha RMSD between
-two structures, using :func:`rmsd`::
+two structures, using :func:`~MDAnalysis.analysis.rms.rmsd`::
 
-   >>> ref = Universe(PDB_small)
-   >>> mobile = Universe(PSF,DCD)
-   >>> rmsd(mobile.atoms.CA.positions, ref.atoms.CA.positions)
+   >>> ref = MDAnalysis.Universe(PDB_small)
+   >>> mobile = MDAnalysis.Universe(PSF,DCD)
+   >>> align.rmsd(mobile.atoms.CA.positions, ref.atoms.CA.positions)
    18.858259026820352
 
 Note that in this example translations have not been removed. In order
@@ -58,14 +59,14 @@ mass (or geometry) first:
 
    >>> ref0 =  ref.atoms.CA.positions - ref.atoms.CA.centerOfMass()
    >>> mobile0 =  mobile.atoms.CA.positions - mobile.atoms.CA.centerOfMass()
-   >>> rmsd(mobile0, ref0)
+   >>> align.rmsd(mobile0, ref0)
     6.8093965864717951
 
 The rotation matrix that superimposes *mobile* on *ref* while
 minimizing the CA-RMSD is obtained with the
 :func:`~MDAnalysis.analysis.align.rotation_matrix` function ::
 
-   >>> R, rmsd = rotation_matrix(mobile0, ref0)
+   >>> R, rmsd = align.rotation_matrix(mobile0, ref0)
    >>> print rmsd
    6.8093965864717951
    >>> print R
@@ -105,11 +106,11 @@ structure, when superimposed on the starting structure.
   time step, reference, and mobile :class:`AtomGroup` to make the code
   more manageable (or use :func:`MDAnalysis.analysis.align.alignto`)
 
+.. rubric:: Possible solution
+
 .. image:: /figs/AdK_domain_rigidity.*
    :width: 50%
    :align: center
-
-.. rubric:: Possible solution
 
 The code contains a function :func:`superpose` and :func:`rmsd`. The
 latter is marginally faster because we only need the calculated RMSD

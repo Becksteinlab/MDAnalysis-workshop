@@ -162,12 +162,15 @@ file also has to be stored, as in the example under
 <p>It is often very useful to project per-atom properties on the
 structure. A common approach is to save scalar values in the B-factor
 field of a PDB file and then color atoms by B-factor (also known as
-&#8220;beta&#8221; or temperature factor).</p>
-<p>The following example computes the shift of each atom in AdK relative to a
-reference structure (after a structural superposition on the CORE
-domain) and projects it on the B-factor with the
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_bfactor" title="(in MDAnalysis v0.8)"><tt class="xref py py-meth docutils literal"><span class="pre">MDAnalysis.core.AtomGroup.AtomGroup.set_bfactor()</span></tt></a> method. Each
-frame is written out as part of a multi-frame PDB file:</p>
+temperature factor or just &#8220;beta&#8221;).</p>
+<p>The following example computes the shift of each atom in AdK relative
+to a reference structure (line 23). We take as reference the closed
+conformation (after a structural superposition on the CORE domain with
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/align.html#MDAnalysis.analysis.align.alignto" title="(in MDAnalysis v0.8)"><tt class="xref py py-func docutils literal"><span class="pre">alignto()</span></tt></a>). The shifts are written
+into the B-factor with the
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup.set_bfactor" title="(in MDAnalysis v0.8)"><tt class="xref py py-meth docutils literal"><span class="pre">set_bfactor()</span></tt></a> method of
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/AtomGroup.html#MDAnalysis.core.AtomGroup.AtomGroup" title="(in MDAnalysis v0.8)"><tt class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></tt></a>. Each frame is written
+out as part of a multi-frame PDB file:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -218,17 +221,27 @@ frame is written out as part of a multi-frame PDB file:</p>
     <span class="c"># iterate through our trajectory</span>
     <span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">:</span>
         <span class="c"># superimpose on the reference CORE (at t=0)</span>
-        <span class="n">rmsd</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">alignto</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="n">CORE_selection</span><span class="p">)</span>
-        <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-        <span class="c"># project displacement on structure via bfactor field</span>
-        <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">set_bfactor</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
-        <span class="n">PDB</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Frame {0}: CORE RMSD before/after superposition: {1[0]:.1f} / {1[1]:.1f} A. &quot;</span>
+<span class="hll">        <span class="n">rmsd</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">alignto</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="n">CORE_selection</span><span class="p">)</span>
+</span><span class="hll">        <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+</span>        <span class="c"># project displacement on structure via bfactor field</span>
+<span class="hll">        <span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">set_bfactor</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+</span><span class="hll">        <span class="n">PDB</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">atoms</span><span class="p">)</span>
+</span>        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Frame {0}: CORE RMSD before/after superposition: {1[0]:.1f} / {1[1]:.1f} A. &quot;</span>
               <span class="s">&quot;min-max displacement: {2:.1f}...{3:.1f} A&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ts</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">rmsd</span><span class="p">,</span> <span class="n">distances</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">distances</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
 
 <span class="k">print</span><span class="p">(</span><span class="s">&quot;Wrote PDB trajectory {0} with distances in bfactor field&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pdbtrj</span><span class="p">))</span>
 </pre></div>
 </td></tr></table></div>
+<p>To visualize in <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a>, use the <a class="reference internal" href="#pdbbfactor-tcl-script"><em>pdbbfactor Tcl script</em></a> below on
+the VMD Tcl commandline:</p>
+<div class="highlight-tcl"><div class="highlight"><pre><span class="nb">source</span> pdbbfactor.tcl
+<span class="nv">pdbbfactor</span> adk_distance_bfac.pdb
+</pre></div>
+</div>
+<p>Rendered snapshots from the beginning, middle, and end of the
+trajectroy are shown below. Note that the tip of the LID domain moves
+by almost 25 Å, which provides some justification for calling the AdK
+closed/open transition a &#8220;large conformational change&#8221;.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -257,12 +270,7 @@ conformation. Color scale ranges from
 </tr>
 </tbody>
 </table>
-<p>To visualize in <a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/">VMD</a>, use the script <tt class="docutils literal"><span class="pre">pdbbfactor.tcl</span></tt> below on the
-VMD Tcl commandline:</p>
-<div class="highlight-tcl"><div class="highlight"><pre><span class="nb">source</span> pdbbfactor.tcl
-<span class="nv">pdbbfactor</span> adk_distance_bfac.pdb
-</pre></div>
-</div>
+<p class="rubric" id="pdbbfactor-tcl-script">pdbbfactor Tcl script</p>
 <p><a class="reference external" href="http://www.ks.uiuc.edu/Research/vmd/script_library/scripts/pdbbfactor/">pdbbfactor</a> was originally written by Justin Gullingsrud (2004) and
 slightly modified for this tutorial:</p>
 <div class="highlight-tcl"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
