@@ -5,7 +5,7 @@
 =======================
 
 Before you can start the tutorial, you need a working installation of
-MDAnalysis_ (with its test suite, MDAnalysisTests_) on your Linux of Mac
+MDAnalysis_ (with its test suite, MDAnalysisTests_) on your Linux or Mac
 OS X machine. The following contains hints and links to further
 documentation to facilitate installation of the package. In an ideal
 setting (development tools (gcc tool chain), python development
