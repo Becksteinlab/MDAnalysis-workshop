@@ -110,7 +110,7 @@ the VMD Tcl commandline:
 Rendered snapshots from the beginning, middle, and end of the
 trajectroy are shown below. Note that the tip of the LID domain moves
 by almost 25 Å, which provides some justification for calling the AdK
-closed/open transition a "large conformational change".
+closed/open transition a "large conformational change" [Seyler2014]_.
 
 +----------------------------------------+----------------------------------------+----------------------------------------+
 | .. image:: /figs/AdK_distance_0001.*   | .. image:: /figs/AdK_distance_0040.*   | .. image:: /figs/AdK_distance_0097.*   |
