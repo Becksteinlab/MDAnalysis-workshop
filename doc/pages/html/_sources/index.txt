@@ -11,11 +11,33 @@ MDAnalysis_ is an open source Python library that helps you to quickly
 write your own analysis algorithm for studying trajectories produced
 by the most popular simulation packages [Michaud-Agrawal2011]_. 
 
-The `online documentation`_ together with the interactive python
-documentation should help you while you are using the library.
+This tutorial serves as an **introduction to MDAnalysis**. It starts
+out with *installing the library* and then introduces the key components
+of the library. It will show you 
+
+* how to load a structure or a MD trajectory; 
+* how to select parts of your system;
+* how to work with atoms, residues and molecules through the object-oriented
+  interface of MDAnalysis;
+* how to analyze MD trajectories;
+* how to write out modified trajectories;
+* how to use algorithms in the  `MDAnalysis.analysis`_ module
+  (intermediate level of difficulty)
+
+The tutorial contains many links to the `online documentation`_ ,
+which you can use to learn more about the functions, classes, an
+methods that are discussed. The online help together with the
+interactive Python documentation (``help(...)`` or ``...?`` in
+:program:`ipython`) should help you while you are using the library.
+
+If you have **questions or suggestions** please post them in the
+`MDAnalysis User Discussion Group`_.
 
 .. _MDAnalysis: http://mdanalysis.googlecode.com/
 .. _online documentation: http://pythonhosted.org/MDAnalysis/
+.. _MDAnalysis.analysis: https://pythonhosted.org/MDAnalysis/documentation_pages/analysis_modules.html
+.. _MDAnalysis User Discussion Group: http://groups.google.com/group/mdnalysis-discussion
+
 
 Contents
 --------
@@ -58,10 +80,10 @@ References
 .. _10.1080/08927022.2014.919497: http://doi.org/10.1080/08927022.2014.919497
 
 
-Indices and tables
-==================
+.. Indices and tables
+.. ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`
 
