@@ -6,7 +6,7 @@ Tutorial for MDAnalysis_.
 
 .. _MDAnalysis: http://mdanalysis.googlecode.com
 
-.. Note:: In development...
+The online version of the tutorial is located at http://orbeckst.github.io/MDAnalysisTutorial/
 
 You can get all tutorial files by cloning this repository::
 
