@@ -23,8 +23,9 @@ proc pdbbfactor { fname } {
         set beta {}
         incr frame
       }
-      default {
-        lappend beta $line
+      ATOM -
+      HETA {
+        lappend beta [string range $line 61 66]
       }
     }
   }
