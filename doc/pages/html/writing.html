@@ -303,7 +303,8 @@ slightly modified for this tutorial:</p>
 28
 29
 30
-31</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># load multi-frame pdb file, storing B factors from each frame in user.</span>
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># load multi-frame pdb file, storing B factors from each frame in user.</span>
 <span class="c"># usage: pdbbfactor &lt;filename&gt;</span>
 <span class="c"># url: http://www.ks.uiuc.edu/Research/vmd/script_library/scripts/pdbbfactor/</span>
 <span class="c">#</span>
@@ -328,8 +329,9 @@ slightly modified for this tutorial:</p>
         <span class="k">set</span> beta <span class="k">{}</span>
         <span class="nb">incr</span> frame
       <span class="k">}</span>
-      <span class="nv">default</span> <span class="k">{</span>
-        <span class="nb">lappend</span> beta <span class="nv">$line</span>
+      <span class="nv">ATOM</span> <span class="o">-</span>
+      <span class="nv">HETA</span> <span class="k">{</span>
+        <span class="nb">lappend</span> beta <span class="k">[</span><span class="nb">string</span> range <span class="nv">$line</span> <span class="mi">61</span> <span class="mi">66</span><span class="k">]</span>
       <span class="k">}</span>
     <span class="k">}</span>
   <span class="k">}</span>
