@@ -24,4 +24,8 @@ installation.
 IPython Notebook
 ================
 
-Most of the tutorial also exists in an [Jupyter](http://jupyter.org) notebook under `notebooks/MDAnalysisTutorial.ipynb`. The notebook can be viewed as [MDAnalysisTutorial.ipynb](http://nbviewer.ipython.org/github/MDAnalysis/MDAnalysisTutorial/blob/master/notebooks/MDAnalysisTutorial.ipynb)
+Most of the tutorial also exists in an Jupyter_ notebook under ``notebooks/MDAnalysisTutorial.ipynb``. The notebook can be viewed as `MDAnalysisTutorial.ipynb`_ through the nbviewer.
+
+.. _Jupyter: http://jupyter.org 
+.. _`MDAnalysisTutorial.ipynb`: 
+   http://nbviewer.ipython.org/github/MDAnalysis/MDAnalysisTutorial/blob/master/notebooks/MDAnalysisTutorial.ipynb
