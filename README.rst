@@ -21,3 +21,7 @@ The sub-directory ``vm`` contains instructions how to install a
 *vagrant* virtual machine with a fully functioning MDAnalysis
 installation.
 
+IPython Notebook
+================
+
+Most of the tutorial also exists in an [Jupyter](http://jupyter.org) notebook under `notebooks/MDAnalysisTutorial.ipynb`. The notebook can be viewed as [MDAnalysisTutorial.ipynb](http://nbviewer.ipython.org/github/MDAnalysis/MDAnalysisTutorial/blob/master/notebooks/MDAnalysisTutorial.ipynb)
