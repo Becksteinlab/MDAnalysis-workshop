@@ -1,0 +1,31 @@
+language: python
+python:
+- '3.4'
+sudo: false
+before_install:
+- wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+- chmod +x miniconda.sh
+- ./miniconda.sh -b
+- export PATH=/home/travis/miniconda/bin:$PATH
+- conda update --yes conda
+install:
+- conda create --yes -q -n pyenv python=$TRAVIS_PYTHON_VERSION sphinx
+- source activate pyenv
+script:
+- |
+  test "${TRAVIS_BUILD_NUMBER}.1" == "${TRAVIS_JOB_NUMBER}" && \
+  (cd ./doc/sphinx && make clean html)
+after_success:
+- |
+  test ${TRAVIS_PULL_REQUEST} == "false" && \
+  test ${TRAVIS_BRANCH} == ${GH_DOC_BRANCH} && \
+  test "${TRAVIS_BUILD_NUMBER}.1" == "${TRAVIS_JOB_NUMBER}" && \
+  bash ./ci/deploy_docs.sh
+env:
+  global:
+  - secure: VJMbuUqJRAqU5bteMAlvMrNLrce4LVZQwx4HRC9XWQ5tdtQZ/9kNeMqAEYGWWscCceyyQZvKXb2E0hgHR8psbFO98S/aMFt/B5ZKSbDEjIXAafDuBi00dDBab5TwbVi072jSIIfjhqnPAZperfbxO1J9+XnwOQyOYv1xFFNGZYp14hEALyAv+wpdgnKi59ns0NjQo4H1maQuVAyf+7GvLHW7AacBCaL8MY3ArN1ENmGKWMDh+IKvwrszqBlTJEbacpZMF8e+pl4gSKoShAv4O2HLqnP2l6WWrzcA+zzuVPNrfDSo4Eq1DwE2PWAtHKqlu7twbSWqU9q16OwxXmiPk7g2kQHliTHJbcMAyyQsLNCjFUa+xIXEeb4fsFadqz5/v8NW7IgqfVH0ThMuV8DLWy+wU8II169+z8wu3FPGhTLpW8yCbYxEcypeqhYtgod4HVWyGhU8WNzqpiL+gvbkCwhEMGb3ZOwZKdBc9dyCz/unHLSD3ipDJRr2bVsnkuPTOO2y0K1oziayVBF+jJ7fN2EDKsVmWdUQFXNjTAyc8jhC4il9UgebFZw2v3TqyDJSb9Tg5t9F1mAmlf9XwM+ocIG9kmtXXA0cmaoGWcE8fAXAr1SVjkRUgHsiljf4L1uv2W+EwWFEDLnJ7AdOWi2+30vmlRDFsMWIiABAUg1LfHI=
+  - GH_DOC_BRANCH: master
+  - GH_REPOSITORY: github.com/MDAnalysis/MDAnalysisTutorial.git
+  - GIT_CI_USER: TravisCI
+  - GIT_CI_EMAIL: TravisCI@mdanalysis.org
+  - MDA_DOCDIR: doc/pages/html
