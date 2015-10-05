@@ -1,4 +1,4 @@
-.. -*- encoding: utf-8 -*-
+.. -*- coding: utf-8 -*-
 
 =====================
  Trajectory analysis
@@ -20,7 +20,7 @@ is an instance of :class:`~MDAnalysis.coordinates.base.Reader` class)::
 
   for ts in u.trajectory:
       print("Frame: %5d, Time: %8.3f ps" % (ts.frame, u.trajectory.time))
-      print("Rgyr: %g A" % (u.atoms.radiusOfGyration(), ))
+      print("Rgyr: %g A" % (u.atoms.radius_of_gyration(), ))
 
 The :attr:`~MDAnalysis.coordinates.base.Reader.time` attribute
 contains the *current time step*. The
@@ -32,9 +32,9 @@ current coordinates, frame number, and time.
 Normally you will collect the data in a list or array, e.g. ::
 
   Rgyr = []
-  protein = u.selectAtoms("protein")
+  protein = u.select_atoms("protein")
   for ts in u.trajectory:
-     Rgyr.append((u.trajectory.time, protein.radiusOfGyration()))
+     Rgyr.append((u.trajectory.time, protein.radius_of_gyration()))
   Rgyr = np.array(Rgyr)
 
 .. Note:: 
@@ -89,9 +89,9 @@ Exercises 4
 
       def theta_NMP(u):
 	  """Calculate the NMP-CORE angle for E. coli AdK in degrees"""
-	  C = u.selectAtoms("resid 115:125 and (backbone or name CB)").centerOfGeometry()
-	  B = u.selectAtoms("resid 90:100 and (backbone or name CB)").centerOfGeometry()
-	  A = u.selectAtoms("resid 35:55 and (backbone or name CB)").centerOfGeometry()
+	  C = u.select_atoms("resid 115:125 and (backbone or name CB)").center_of_geometry()
+	  B = u.select_atoms("resid 90:100 and (backbone or name CB)").center_of_geometry()
+	  A = u.select_atoms("resid 35:55 and (backbone or name CB)").center_of_geometry()
 	  BA = A - B
 	  BC = C - B
 	  theta = np.arccos(np.dot(BA, BC)/(norm(BA)*norm(BC)))
@@ -99,9 +99,9 @@ Exercises 4
 
       def theta_LID(u):
 	  """Calculate the LID-CORE angle for E. coli AdK in degrees"""
-	  C = u.selectAtoms("resid 179:185 and (backbone or name CB)").centerOfGeometry()
-	  B = u.selectAtoms("resid 115:125 and (backbone or name CB)").centerOfGeometry()
-	  A = u.selectAtoms("resid 125:153 and (backbone or name CB)").centerOfGeometry()
+	  C = u.select_atoms("resid 179:185 and (backbone or name CB)").center_of_geometry()
+	  B = u.select_atoms("resid 115:125 and (backbone or name CB)").center_of_geometry()
+	  A = u.select_atoms("resid 125:153 and (backbone or name CB)").center_of_geometry()
 	  BA = A - B
 	  BC = C - B
 	  theta = np.arccos(np.dot(BA, BC)/(norm(BA)*norm(BC)))
@@ -152,8 +152,8 @@ Bells and whistles
 Especially useful for interactive analysis in :program:`ipython
 --pylab` using list comprehensions (implicit for loops)::
 
-  protein = u.selectAtoms("protein")
-  data = np.array([(u.trajectory.time, protein.radiusOfGyration()) for ts in u.trajectory])
+  protein = u.select_atoms("protein")
+  data = np.array([(u.trajectory.time, protein.radius_of_gyration()) for ts in u.trajectory])
   time, RG = data.T
   plot(time, RG)  
 
@@ -164,7 +164,7 @@ One can directly **jump to a frame** by using "indexing syntax":
   >>> u.trajectory[50]
   < Timestep 51 with unit cell dimensions array([  0.,   0.,   0.,  90.,  90.,  90.], dtype=float32) >
   >>> ts.frame
-  51
+  50
 
 You can also **slice trajectories**, e.g. if you want to start at the 10th
 frame and go to 10th before the end, and only use every 5th frame::
@@ -175,15 +175,17 @@ frame and go to 10th before the end, and only use every 5th frame::
 
 .. Note:: 
 
-   Trajectory indexing and slicing uses 0-based indices (as in standard Python) but
-   MDAnalysis numbers frames starting with 1 (for historical reasons
-   and according to the practice of all MD codes).
+   Trajectory indexing and slicing uses 0-based indices (as in
+   standard Python) and MDAnalysis also numbers frames starting
+   with 0. Thus the "tenth frame" in a trjectory has ``ts.frame ==
+   9``.
 
+   
 .. Note::
 
    Not all trajectory readers support direct access and arbitrary
-   slices, although many commonly ones such as DCD, XTC/TRR, and Amber
-   NETCDF do.
+   slices, although many commonly used ones such as DCD, XTC/TRR, and
+   Amber NETCDF do.
 
 .. SeeAlso:: One can iterate through multiple trajectories in parallel
              with the help of :func:`itertools.izip` from the

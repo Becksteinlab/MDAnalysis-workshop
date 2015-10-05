@@ -1,4 +1,4 @@
-.. -*- encoding: utf-8 -*-
+.. -*- coding: utf-8 -*-
 
 =====================
  Writing coordinates
@@ -26,7 +26,7 @@ single frame is to use the
 protein without solvent to a file in GRO format::
 
    u = MDAnalysis.Universe(PDB)
-   protein = u.selectAtoms("protein")
+   protein = u.select_atoms("protein")
    protein.write("protein.gro")
 
 MDAnalysis uses the file suffix to determine the output file format
@@ -49,7 +49,7 @@ The typical use pattern is to
 #. Close the trajectory with
    :meth:`~MDAnalysis.coordinates.base.Writer.close` (although it is
    recommended to simply use the writer with the :keyword:`with`
-   statement and have the context handler close the file automatically).
+   statement and have the context manager close the file automatically).
 
 Example: Protein-only trajectory
 --------------------------------
@@ -61,8 +61,8 @@ example below::
   from MDAnalysis.tests.datafiles import PDB, XTC
   
   u = MDAnalysis.Universe(PDB, XTC)
-  protein = u.selectAtoms("protein")
-  with MDAnalysis.Writer("protein.xtc", protein.numberOfAtoms()) as W:
+  protein = u.select_atoms("protein")
+  with MDAnalysis.Writer("protein.xtc", protein.n_atoms) as W:
       for ts in u.trajectory:
           W.write(protein)
 
@@ -141,5 +141,5 @@ slightly modified for this tutorial:
           `vmduser.py`_.
 
 .. _`vmduser.py`: 
-   https://github.com/orbeckst/MDAnalysisTutorial/blob/master/doc/sphinx/code/vmduser.py
+   https://github.com/MDAnalysis/MDAnalysisTutorial/blob/master/doc/sphinx/code/vmduser.py
 

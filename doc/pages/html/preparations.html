@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Preparations &mdash; MDAnalysis Tutorial 0.1.1 documentation</title>
+    <title>Preparations &mdash; MDAnalysis Tutorial 1.0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.1',
+        VERSION:     '1.0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,14 +23,14 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis Tutorial 0.1.1 documentation" href="index.html" />
+    <link rel="top" title="MDAnalysis Tutorial 1.0.2 documentation" href="index.html" />
     <link rel="next" title="Basics" href="basics.html" />
     <link rel="prev" title="Installing MDAnalysis" href="installation.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -42,10 +42,10 @@
         <li class="right" >
           <a href="installation.html" title="Installing MDAnalysis"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">MDAnalysis Tutorial 0.1.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">MDAnalysis Tutorial 1.0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/mdanalysistutorial-logo-200x150.png" alt="Logo"/>
@@ -65,12 +65,14 @@
   <h4>Next topic</h4>
   <p class="topless"><a href="basics.html"
                         title="next chapter">Basics</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/preparations.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/preparations.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
@@ -89,35 +91,35 @@
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="preparations">
-<h1>Preparations<a class="headerlink" href="#preparations" title="Permalink to this headline">¶</a></h1>
+<span id="chapter-preparations"></span><h1>Preparations<a class="headerlink" href="#preparations" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="python-interpreter">
 <h2>Python interpreter<a class="headerlink" href="#python-interpreter" title="Permalink to this headline">¶</a></h2>
 <p>In the following we are using <a class="reference external" href="http://ipython.org/">ipython</a> as our interactive Python
 interpreter. It has a number of very useful features:</p>
 <ul>
-<li><p class="first">use the interactive help (<tt class="samp docutils literal"><em><span class="pre">command</span></em><span class="pre">?</span></tt> or
-<tt class="samp docutils literal"><em><span class="pre">command</span></em><span class="pre">??</span></tt>)</p>
+<li><p class="first">use the interactive help (<code class="samp docutils literal"><em><span class="pre">command</span></em><span class="pre">?</span></code> or
+<code class="samp docutils literal"><em><span class="pre">command</span></em><span class="pre">??</span></code>)</p>
 </li>
-<li><p class="first"><tt class="kbd docutils literal"><span class="pre">TAB</span></tt> completion, e.g. <tt class="code docutils literal"><span class="pre">MDAnalysis.U&lt;TAB&gt;</span></tt> will
-autocomplete to <tt class="code docutils literal"><span class="pre">MDAnalysis.Universe</span></tt>.</p>
-<p><tt class="code docutils literal"><span class="pre">MDAnalysis.Universe.&lt;TAB&gt;</span></tt> will show all methods and
+<li><p class="first"><code class="kbd docutils literal"><span class="pre">TAB</span></code> completion, e.g. <code class="code docutils literal"><span class="pre">MDAnalysis.U&lt;TAB&gt;</span></code> will
+autocomplete to <code class="code docutils literal"><span class="pre">MDAnalysis.Universe</span></code>.</p>
+<p><code class="code docutils literal"><span class="pre">MDAnalysis.Universe.&lt;TAB&gt;</span></code> will show all methods and
 attributes.</p>
 </li>
-<li><p class="first">quick plotting with <tt class="xref py py-mod docutils literal"><span class="pre">matplotlib</span></tt> (and array manipulations with
-<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.8)"><tt class="xref py py-mod docutils literal"><span class="pre">numpy</span></tt></a>)</p>
+<li><p class="first">quick plotting with <code class="xref py py-mod docutils literal"><span class="pre">matplotlib</span></code> (and array manipulations with
+<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.9)"><code class="xref py py-mod docutils literal"><span class="pre">numpy</span></code></a>)</p>
 </li>
 <li><p class="first">notebook mode (future versions of this tutorial will likely be
-provided as ipython notebooks): <tt class="docutils literal"><span class="pre">ipython</span> <span class="pre">notebook</span> <span class="pre">--matplotlib=inline</span></tt></p>
+provided as ipython notebooks): <code class="docutils literal"><span class="pre">ipython</span> <span class="pre">notebook</span> <span class="pre">--matplotlib=inline</span></code></p>
 </li>
 </ul>
 <p>Start <strong class="program">ipython</strong>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">ipython</span>  <span class="o">--</span><span class="n">matplotlib</span>
 </pre></div>
 </div>
-<p>Inside <strong class="program">ipython</strong>, load <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.8)"><tt class="xref py py-mod docutils literal"><span class="pre">numpy</span></tt></a></p>
+<p>Inside <strong class="program">ipython</strong>, load <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.9)"><code class="xref py py-mod docutils literal"><span class="pre">numpy</span></code></a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
@@ -132,19 +134,19 @@ as PDB files). As such, it is mainly used</p>
 <li>in scripts</li>
 <li>for interactive use</li>
 </ol>
-<p>In both cases, we always import the module <tt class="xref py py-mod docutils literal"><span class="pre">MDAnalysis</span></tt> at the top level:</p>
+<p>In both cases, we always import the module <code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis</span></code> at the top level:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">MDAnalysis</span>
 </pre></div>
 </div>
 <p>(Not all sub-modules are imported automatically; for instance,
-analysis modules such as <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/rms.html#module-MDAnalysis.analysis.rms" title="(in MDAnalysis v0.8)"><tt class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></tt></a> have to be
+analysis modules such as <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/rms.html#module-MDAnalysis.analysis.rms" title="(in MDAnalysis v0.11)"><code class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></code></a> have to be
 imported explicitly.)</p>
 <p>MDAnalysis comes with a bunch of test files and trajectories. One is a
 trajectory of the enzyme adenylate kinase that samples a transition
 from a closed to an open conformation <a class="reference internal" href="index.html#beckstein2009" id="id1">[Beckstein2009]</a>, which we will
 use as an example throughout the tutorial. The topology file (CHARMM
 PSF format) and trajectory (CHARMM DCD format) can be loaded into the
-variables <tt class="code docutils literal"><span class="pre">PSF</span></tt> and <tt class="code docutils literal"><span class="pre">DCD</span></tt>:</p>
+variables <code class="code docutils literal"><span class="pre">PSF</span></code> and <code class="code docutils literal"><span class="pre">DCD</span></code>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span>
 </pre></div>
 </div>
@@ -157,7 +159,7 @@ variables <tt class="code docutils literal"><span class="pre">PSF</span></tt> an
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -169,12 +171,12 @@ variables <tt class="code docutils literal"><span class="pre">PSF</span></tt> an
         <li class="right" >
           <a href="installation.html" title="Installing MDAnalysis"
              >previous</a> |</li>
-        <li><a href="index.html">MDAnalysis Tutorial 0.1.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">MDAnalysis Tutorial 1.0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
-        &copy; Copyright 2014, Oliver Beckstein.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Oliver Beckstein.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>
