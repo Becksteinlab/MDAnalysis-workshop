@@ -1,11 +1,14 @@
-.. -*- encoding: utf-8 -*-
+.. -*- mode: reST; coding: utf-8 -*-
 .. MDAnalysis Tutorial documentation master file, created by
    sphinx-quickstart on Thu Oct 30 00:40:26 2014.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
 MDAnalysis Tutorial
 ===================
+
+:MDAnalysis version: ≥ |MDAnalysis_version|
+:Tutorial release: |release|
+:Last updated: |today|
+
 
 MDAnalysis_ is an open source Python library that helps you to quickly
 write your own analysis algorithm for studying trajectories produced
@@ -33,7 +36,7 @@ interactive Python documentation (``help(...)`` or ``...?`` in
 If you have **questions or suggestions** please post them in the
 `MDAnalysis User Discussion Group`_.
 
-.. _MDAnalysis: http://mdanalysis.googlecode.com/
+.. _MDAnalysis: http://www.mdanalysis.org
 .. _online documentation: http://pythonhosted.org/MDAnalysis/
 .. _MDAnalysis.analysis: https://pythonhosted.org/MDAnalysis/documentation_pages/analysis_modules.html
 .. _MDAnalysis User Discussion Group: http://groups.google.com/group/mdnalysis-discussion
@@ -43,8 +46,9 @@ Contents
 --------
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
 
+   howto
    installation
    preparations
    basics

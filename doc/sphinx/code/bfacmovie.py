@@ -13,7 +13,7 @@ ref = MDAnalysis.Universe(PSF, DCD)  # copy of u
 CORE_selection = "resid 1:29 or resid 60:121 or resid 160:214"
 pdbtrj = "adk_distance_bfac.pdb"
 
-with MDAnalysis.Writer(pdbtrj, multiframe=True, bonds=False, numatoms=u.atoms.numberOfAtoms()) as PDB:
+with MDAnalysis.Writer(pdbtrj, multiframe=True, bonds=False, n_atoms=u.atoms.n_atoms) as PDB:
     # reference coordinates: set to first frame
     ref.trajectory[0]
     # iterate through our trajectory
@@ -22,7 +22,7 @@ with MDAnalysis.Writer(pdbtrj, multiframe=True, bonds=False, numatoms=u.atoms.nu
         rmsd = MDAnalysis.analysis.align.alignto(u.atoms, ref.atoms, select=CORE_selection)
         distances = np.sqrt(np.sum((u.atoms.positions - ref.atoms.positions)**2, axis=1))
         # project displacement on structure via bfactor field
-        u.atoms.set_bfactor(distances)
+        u.atoms.set_bfactors(distances)
         PDB.write(u.atoms)
         print("Frame {0}: CORE RMSD before/after superposition: {1[0]:.1f} / {1[1]:.1f} A. "
               "min-max displacement: {2:.1f}...{3:.1f} A".format(ts.frame, rmsd, distances.min(), distances.max()))

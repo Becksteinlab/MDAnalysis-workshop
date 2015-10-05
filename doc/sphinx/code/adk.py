@@ -3,9 +3,9 @@ from numpy.linalg import norm
 
 def theta_NMP(u):
     """Calculate the NMP-CORE angle for E. coli AdK in degrees"""
-    C = u.selectAtoms("resid 115:125 and (backbone or name CB)").centerOfGeometry()
-    B = u.selectAtoms("resid 90:100 and (backbone or name CB)").centerOfGeometry()
-    A = u.selectAtoms("resid 35:55 and (backbone or name CB)").centerOfGeometry()
+    C = u.select_atoms("resid 115:125 and (backbone or name CB)").center_of_geometry()
+    B = u.select_atoms("resid 90:100 and (backbone or name CB)").center_of_geometry()
+    A = u.select_atoms("resid 35:55 and (backbone or name CB)").center_of_geometry()
     BA = A - B
     BC = C - B
     theta = np.arccos(np.dot(BA, BC)/(norm(BA)*norm(BC)))
@@ -13,9 +13,9 @@ def theta_NMP(u):
 
 def theta_LID(u):
     """Calculate the LID-CORE angle for E. coli AdK in degrees"""
-    C = u.selectAtoms("resid 179:185 and (backbone or name CB)").centerOfGeometry()
-    B = u.selectAtoms("resid 115:125 and (backbone or name CB)").centerOfGeometry()
-    A = u.selectAtoms("resid 125:153 and (backbone or name CB)").centerOfGeometry()
+    C = u.select_atoms("resid 179:185 and (backbone or name CB)").center_of_geometry()
+    B = u.select_atoms("resid 115:125 and (backbone or name CB)").center_of_geometry()
+    A = u.select_atoms("resid 125:153 and (backbone or name CB)").center_of_geometry()
     BA = A - B
     BC = C - B
     theta = np.arccos(np.dot(BA, BC)/(norm(BA)*norm(BC)))

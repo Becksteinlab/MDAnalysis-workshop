@@ -1,4 +1,4 @@
-.. -*- encoding: utf-8 -*-
+.. -*- coding: utf-8 -*-
 
 =========================
  Working with AtomGroups
@@ -9,7 +9,7 @@ methods attributes defined that provide information about the atoms
 such as names, indices, or the coordinates in the
 :attr:`~MDAnalysis.core.AtomGroup.AtomGroup.positions` attribute::
 
-  >>> CA = u.selectAtoms("protein and name CA")
+  >>> CA = u.select_atoms("protein and name CA")
   >>> r = CA.positions
   >>> r.shape
   (214, 3)
@@ -29,17 +29,17 @@ Other quantities that can be easily calculated for a
 :class:`~MDAnalysis.core.AtomGroup.AtomGroup` are
 
 * the center of mass
-  :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.centerOfMass` and the
+  :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.center_of_mass` and the
   center of geoemtry (or centroid)
-  :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.centerOfGeometry`
+  :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.center_of_geometry`
   (equivalent to
   :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.centroid`);
 
 * the total mass
-  :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.totalMass`;
+  :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.total_mass`;
 
 * the total charge
-  :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.totalCharge` (if partial
+  :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.total_charge` (if partial
   charges are defined in the topology);
 
 * the radius of gyration
@@ -48,12 +48,12 @@ Other quantities that can be easily calculated for a
 
         R_\mathrm{gyr} = \sqrt{\frac{1}{M}\sum_{i=1}^{N} m_i(\mathbf{r}_i - \mathbf{R})^2}
 
-  with :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.radiusOfGyration`;
+  with :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.radius_of_gyration`;
 
 * the principal axes :math:`\mathbf{p}_1, \mathbf{p}_2, \mathbf{p}_1`
-  from :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.principalAxes` via
+  from :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.principal_axes` via
   a diagonalization of the tensor of inertia
-  :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.momentOfInertia`,
+  :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.moment_of_inertia`,
 
   .. math::
 
@@ -88,12 +88,12 @@ AdK consists of three domains:
    the three domains. 
 
         >>> domains = {
-        >>>   'CORE': u.selectAtoms("protein and (resid 1-29 or resid 60-121 or resid 160-214)"),
-        >>>   'NMP': u.selectAtoms("protein and resid 30-59"),
-	>>>   'LID': u.selectAtoms("protein and resid 122-159")
+        >>>   'CORE': u.select_atoms("protein and (resid 1-29 or resid 60-121 or resid 160-214)"),
+        >>>   'NMP': u.select_atoms("protein and resid 30-59"),
+	>>>   'LID': u.select_atoms("protein and resid 122-159")
         >>>   }
         >>> cg = dict((name, dom.centroid()) for name,dom in domains.items())
-        >>> cm = dict((name, dom.centerOfMass()) for name,dom in domains.items())
+        >>> cm = dict((name, dom.center_of_mass()) for name,dom in domains.items())
         >>> print(cg)
         {'LID': array([-15.16074944,   2.11599636,  -4.37305355], dtype=float32), 
          'CORE': array([ 4.43884087,  2.05389476,  1.63895261], dtype=float32), 
@@ -163,7 +163,7 @@ The angle between vectors :math:`\vec{BA}` and :math:`\vec{BC}` is
 
      def theta_NMP(u):
         """Calculate the NMP-CORE angle for E. coli AdK in degrees"""
-	A = u.selectAtoms("resid 115:125 and (backbone or name CB)").centerOfGeometry()
+	A = u.select_atoms("resid 115:125 and (backbone or name CB)").center_of_geometry()
 	B = 
 	C = 
 	BA = A - B
@@ -207,7 +207,7 @@ You can directly write a :class:`~MDAnalysis.core.AtomGroup.AtomGroup`
 to a file with the :meth:`~MDAnalysis.core.AtomGroup.AtomGroup.write`
 method::
 
-   CORE = u.selectAtoms("resid 1:29 or resid 60:121 or resid 160:214")
+   CORE = u.select_atoms("resid 1:29 or resid 60:121 or resid 160:214")
    CORE.write("AdK_CORE.pdb")
 
 (The extension determines the file type.)
@@ -215,7 +215,7 @@ method::
 You can do fairly complicated things on the fly, such as writing the
 hydration shell around a protein to a file ::
 
-   u.selectAtoms("byres (name OW and around 4.0 protein)").write("hydration_shell.pdb")
+   u.select_atoms("byres (name OW and around 4.0 protein)").write("hydration_shell.pdb")
 
 for further analysis or visualization.
 

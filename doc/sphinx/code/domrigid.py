@@ -11,7 +11,7 @@ def superpose(mobile, xref0, xref_com=None):
     """
     # 995 us
     xref_com = xref_com if xref_com is not None else np.array([0., 0., 0.])
-    xmobile0 = mobile.positions - mobile.centerOfMass()
+    xmobile0 = mobile.positions - mobile.center_of_mass()
     R, rmsd = rotation_matrix(xmobile0, xref0)
     mobile.rotate(R)
     mobile.translate(xref_com)
@@ -23,8 +23,8 @@ def rmsd(mobile, xref0):
     The coordinates are not changed. No mass weighting.
     """
     # 738 us
-    xmobile0 = mobile.positions - mobile.centerOfMass()
-    return CalcRMSDRotationalMatrix(xref0.T.astype(np.float64), xmobile0.T.astype(np.float64), mobile.numberOfAtoms(), None, None)
+    xmobile0 = mobile.positions - mobile.center_of_mass()
+    return CalcRMSDRotationalMatrix(xref0.T.astype(np.float64), xmobile0.T.astype(np.float64), mobile.n_atoms, None, None)
 
 
 if __name__ == "__main__":
@@ -38,14 +38,14 @@ if __name__ == "__main__":
 
     # one AtomGroup per domain
     domains = {
-        'CORE': u.selectAtoms("(resid 1:29 or resid 60:121 or resid 160:214) and name CA"),
-        'LID': u.selectAtoms("resid 122-159 and name CA"),
-        'NMP': u.selectAtoms("resid 30-59 and name CA"),
+        'CORE': u.select_atoms("(resid 1:29 or resid 60:121 or resid 160:214) and name CA"),
+        'LID': u.select_atoms("resid 122-159 and name CA"),
+        'NMP': u.select_atoms("resid 30-59 and name CA"),
         }
     colors = {'CORE': 'black', 'NMP': 'blue', 'LID': 'red'}
 
     u.trajectory[0]   # rewind trajectory
-    xref0 = dict((name, g.positions - g.centerOfMass()) for name,g in domains.iteritems())
+    xref0 = dict((name, g.positions - g.center_of_mass()) for name,g in domains.iteritems())
 
     nframes = len(u.trajectory)
     results = dict((name, np.zeros((nframes, 2), dtype=np.float64)) for name in domains)

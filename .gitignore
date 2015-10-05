@@ -1,2 +1,10 @@
 *~
 .vagrant
+notebooks/.ipynb_checkpoints
+notebooks/*.png
+notebooks/*.svg
+notebooks/*.pdf
+notebooks/*.pdb
+notebooks/*.ndx
+tmp
+

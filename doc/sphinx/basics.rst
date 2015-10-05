@@ -1,4 +1,6 @@
-.. -*- encoding: utf-8 -*-
+.. -*- coding: utf-8 -*-
+
+.. _chapter-basics:
 
 ========
  Basics
@@ -101,7 +103,7 @@ Exercise 1
    :class:`~MDAnalysis.core.AtomGroup.AtomGroup.Universe` ``u``? ::
 
      >>> len(u.atoms.residues)
-     >>> u.atoms.numberOfResidues()
+     >>> u.atoms.n_residues
      214
 
    How do you get a list of the residue names (such as ``["Ala",
@@ -109,8 +111,8 @@ Exercise 1
    atoms 1000 to 1300? And as a list of tuples ``(resname, resid)``
    (Hint: :func:`zip`)?::
 
-     >>> resnames = u.atoms[999:1300].resnames()   
-     >>> resids = u.atoms[999:1300].resids()   
+     >>> resnames = u.atoms[999:1300].residues.resnames
+     >>> resids = u.atoms[999:1300].residues.resids
      >>> zip(resnames, resids)
 
    How do you obtain the resid and the resname for the 100th residue?
@@ -126,7 +128,7 @@ Exercise 1
 
      >>> len(u.segments)
      >>> len(u.atoms.segments)
-     >>> u.atoms.numberOfSegments()
+     >>> u.atoms.n_segments
      1
 
    What is the segment identifier of the first
@@ -158,17 +160,17 @@ Selections
 
 MDAnalysis comes with a fairly complete `atom selection`_
 facility. Primarily, one uses the method
-:meth:`~MDAnalysis.core.AtomGroup.Universe.selectAtoms` of a
+:meth:`~MDAnalysis.core.AtomGroup.Universe.select_atoms` of a
 :class:`~MDAnalysis.core.AtomGroup.Universe`::
 
-  >>> CA = u.selectAtoms("protein and name CA")
+  >>> CA = u.select_atoms("protein and name CA")
   >>> CA
   >>> <AtomGroup with 214 atoms>
 
 but really any :class:`~MDAnalysis.core.AtomGroup.AtomGroup` has a
-:meth:`~MDAnalysis.core.AtomGroup.AtomGroup.selectAtoms` method::
+:meth:`~MDAnalysis.core.AtomGroup.AtomGroup.select_atoms` method::
 
-  >>> acidic = CA.selectAtoms("resname ASP or resname GLU")
+  >>> acidic = CA.select_atoms("resname ASP or resname GLU")
   >>> acidic
   >>> <AtomGroup with 35 atoms>
   >>> acidic.residues
@@ -180,7 +182,7 @@ Selections can be combined with boolean expression and it is also
 possible to select by geometric criteria, e.g. with the :samp:`around
 {distance} {selection}` keyword::
 
-  u.selectAtoms("((resname ASP or resname GLU) and not (backbone or name CB or name CG)) \
+  u.select_atoms("((resname ASP or resname GLU) and not (backbone or name CB or name CG)) \
                    and around 4.0 ((resname LYS or resname ARG) \
                                     and not (backbone or name CB or name CG))").residues
 
@@ -199,13 +201,13 @@ Exercises 2
 
    Solution::
 
-      >>> u.selectAtoms("resid 100-200")
+      >>> u.select_atoms("resid 100-200")
       <AtomGroup with 1609 atoms>
 
    Compare to the slicing solution (doing an element-wise comparison,
    i.e. residue by residue in each :func:`list`)::
 
-      >>> list(u.selectAtoms("resid 100-200").residues) == list(u.atoms.residues[99:200])
+      >>> list(u.select_atoms("resid 100-200").residues) == list(u.atoms.residues[99:200])
 
    If one wants to get specific residues in scripts one typically uses
    selections instead of slicing because the index in the slice might
@@ -219,14 +221,14 @@ Exercises 2
 
    Solution::
 
-      >>> sel = u.selectAtoms("(byres name CA) and not (byres name CB)").residues
+      >>> sel = u.select_atoms("(byres name CA) and not (byres name CB)").residues
       >>> len(sel)
       20
 
    These are all Glycines, as can be seen by comparing the residue
    groups element-wise::
 
-      >>> glycines = u.selectAtoms("resname GLY")
+      >>> glycines = u.select_atoms("resname GLY")
       >>> list(sel) == list(glycines.residues)
       True
 

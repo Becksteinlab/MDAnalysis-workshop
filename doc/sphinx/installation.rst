@@ -1,4 +1,6 @@
-.. -*- encoding: utf-8 -*-
+.. -*- coding: utf-8 -*-
+
+.. _chapter-installing-mdanalysis:
 
 =======================
  Installing MDAnalysis
@@ -22,9 +24,11 @@ tutorial one can also set up a Linux :ref:`virtual-machine` that
 installs itself with everything needed and the most recent release of
 MDAnalysis.
 
+.. Note:: For this tutorial, you will need at least version
+          |MDAnalysis_version| of MDAnalysis.
 
-.. _MDAnalysis: http://mdanalysis.googlecode.com
-.. _MDAnalysisTests: https://code.google.com/p/mdanalysis/wiki/UnitTests
+.. _MDAnalysis: http://www.mdanalysis.org
+.. _MDAnalysisTests: http://wiki.mdanalysis.org/UnitTests
 
 
 Installation methods
@@ -36,13 +40,9 @@ Local installation
 ------------------
 
 The latest release of MDAnalysis_ (and the full test suite) can be
-installed from the python package index with pip_ or `easy_install`_::
+installed from the python package index with pip_ ::
 
   pip install --user MDAnalysis MDAnalysisTests
-
-or ::
-
-  easy_install --user MDAnalysis MDAnalysisTests
 
 (Installation of the test suite is required for this tutorial because
 we will use some of the data files that are part of the tests.)
@@ -58,13 +58,12 @@ For this tutorial you can also alternatively use a complete
 installation inside a :ref:`virtual-machine`.
 
 .. _pip: http://www.pip-installer.org/en/latest/index.html
-.. _`easy_install`: http://packages.python.org/distribute/easy_install.html
-.. _installation notes: https://code.google.com/p/mdanalysis/wiki/Install
-.. _installation recipes: https://code.google.com/p/mdanalysis/wiki/InstallRecipes
-.. _installing the netcdf library: https://code.google.com/p/mdanalysis/wiki/netcdf
+.. _installation notes: http://wiki.mdanalysis.org/Install
+.. _installation recipes: http://wiki.mdanalysis.org/InstallRecipes
+.. _installing the netcdf library: http://wiki.mdanalysis.org/netcdf
 .. _user discussion group: http://groups.google.com/group/mdnalysis-discussion
-.. _tutorial git repository: https://github.com/orbeckst/MDAnalysisTutorial
-.. _`vm/README.rst`: https://github.com/orbeckst/MDAnalysisTutorial/tree/master/vm
+.. _tutorial git repository: https://github.com/MDAnalysis/MDAnalysisTutorial
+.. _`vm/README.rst`: https://github.com/MDAnalysis/MDAnalysisTutorial/tree/master/vm
 
 .. _virtual-machine:
 
@@ -74,7 +73,7 @@ Virtual machine
 You will first need to clone the `tutorial git repository`_ with
 :program:`git`::
 
-  git clone https://github.com/orbeckst/MDAnalysisTutorial.git 
+  git clone https://github.com/MDAnalysis/MDAnalysisTutorial.git 
   cd MDAnalysisTutorial
 
 The directory ``vm`` contains configuration files for `vagrant`_
@@ -105,9 +104,9 @@ deletion of files!
 Testing the installation
 ========================
 
-.. _test cases: https://code.google.com/p/mdanalysis/wiki/UnitTests
+.. _test cases: http://wiki.mdanalysis.org/UnitTests
 
-MDAnalysis comes with over 700 `test cases`_ that check its
+MDAnalysis comes with over 2500 `test cases`_ that check its
 functionality. These test cases can be run with the command ::
 
   python -c 'from MDAnalysis.tests import test; test(label="full", verbose=3, extra_argv=["--exe"])'
