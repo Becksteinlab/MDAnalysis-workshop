@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Using the MDAnalysis.analysis modules &mdash; MDAnalysis Tutorial 0.1.1 documentation</title>
+    <title>Using the MDAnalysis.analysis modules &mdash; MDAnalysis Tutorial 1.0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.1',
+        VERSION:     '1.0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis Tutorial 0.1.1 documentation" href="index.html" />
+    <link rel="top" title="MDAnalysis Tutorial 1.0.2 documentation" href="index.html" />
     <link rel="prev" title="Writing coordinates" href="writing.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="writing.html" title="Writing coordinates"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">MDAnalysis Tutorial 0.1.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">MDAnalysis Tutorial 1.0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -88,18 +88,18 @@
   <div class="section" id="using-the-mdanalysis-analysis-modules">
 <h1>Using the MDAnalysis.analysis modules<a class="headerlink" href="#using-the-mdanalysis-analysis-modules" title="Permalink to this headline">¶</a></h1>
 <p>MDAnalysis comes with a number of existing analysis code in the
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis_modules.html">MDAnalysis.analysis</a> module and <a class="reference external" href="http://code.google.com/p/mdanalysis/source/browse/#git%2Fpackage%2Fexamples">example scripts</a> (see also the
-<a class="reference external" href="https://code.google.com/p/mdanalysis/wiki/Examples">Examples</a> on the MDAnalysis wiki).</p>
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis_modules.html">MDAnalysis.analysis</a> module and <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/tree/develop/package/examples">example scripts</a> (see also the
+<a class="reference external" href="http://wiki.mdanalysis.org/Examples">Examples</a> on the MDAnalysis wiki).</p>
 <div class="section" id="rmsd">
 <h2>RMSD<a class="headerlink" href="#rmsd" title="Permalink to this headline">¶</a></h2>
-<p>As an example we will use the <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/rms.html#MDAnalysis.analysis.rms.rmsd" title="(in MDAnalysis v0.8)"><tt class="xref py py-func docutils literal"><span class="pre">MDAnalysis.analysis.rms.rmsd()</span></tt></a>
-function from the <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/rms.html#module-MDAnalysis.analysis.rms" title="(in MDAnalysis v0.8)"><tt class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></tt></a> module. It computes
+<p>As an example we will use the <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/rms.html#MDAnalysis.analysis.rms.rmsd" title="(in MDAnalysis v0.11)"><tt class="xref py py-func docutils literal"><span class="pre">MDAnalysis.analysis.rms.rmsd()</span></tt></a>
+function from the <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/rms.html#module-MDAnalysis.analysis.rms" title="(in MDAnalysis v0.11)"><tt class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.rms</span></tt></a> module. It computes
 the coordinate root mean square distance between two sets of
 coordinates. For example for the AdK trajectory the backbone RMSD
 between first and last frame is</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis.analysis.rms</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bb</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&#39;backbone&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bb</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&#39;backbone&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">positions</span>  <span class="c"># coordinates of first frame</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>      <span class="c"># forward to last frame</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">B</span> <span class="o">=</span> <span class="n">bb</span><span class="o">.</span><span class="n">positions</span>  <span class="c"># coordinates of last frame</span>
@@ -111,37 +111,37 @@ between first and last frame is</p>
 <div class="section" id="superposition-of-structure">
 <h2>Superposition of structure<a class="headerlink" href="#superposition-of-structure" title="Permalink to this headline">¶</a></h2>
 <p>In order to superimpose two structures in a way that minimizes the
-RMSD we have functions in the <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/align.html#module-MDAnalysis.analysis.align" title="(in MDAnalysis v0.8)"><tt class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.align</span></tt></a> module.</p>
+RMSD we have functions in the <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/align.html#module-MDAnalysis.analysis.align" title="(in MDAnalysis v0.11)"><tt class="xref py py-mod docutils literal"><span class="pre">MDAnalysis.analysis.align</span></tt></a> module.</p>
 <p>The example uses files provided as part of the MDAnalysis test suite
 (in the variables <tt class="xref py py-data docutils literal"><span class="pre">PSF</span></tt>,
 <tt class="xref py py-data docutils literal"><span class="pre">DCD</span></tt>, and
 <tt class="xref py py-data docutils literal"><span class="pre">PDB_small</span></tt>). For all further
 examples execute first</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">MDAnalysis</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis</span> <span class="kn">import</span> <span class="n">align</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.analysis</span> <span class="kn">import</span> <span class="n">align</span><span class="p">,</span> <span class="n">rms</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">MDAnalysis.tests.datafiles</span> <span class="kn">import</span> <span class="n">PSF</span><span class="p">,</span> <span class="n">DCD</span><span class="p">,</span> <span class="n">PDB_small</span>
 </pre></div>
 </div>
 <p>In the simplest case, we can simply calculate the C-alpha RMSD between
-two structures, using <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/rms.html#MDAnalysis.analysis.rms.rmsd" title="(in MDAnalysis v0.8)"><tt class="xref py py-func docutils literal"><span class="pre">rmsd()</span></tt></a>:</p>
+two structures, using <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/rms.html#MDAnalysis.analysis.rms.rmsd" title="(in MDAnalysis v0.11)"><tt class="xref py py-func docutils literal"><span class="pre">rmsd()</span></tt></a>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ref</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PDB_small</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span> <span class="o">=</span> <span class="n">MDAnalysis</span><span class="o">.</span><span class="n">Universe</span><span class="p">(</span><span class="n">PSF</span><span class="p">,</span><span class="n">DCD</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">align</span><span class="o">.</span><span class="n">rmsd</span><span class="p">(</span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rms</span><span class="o">.</span><span class="n">rmsd</span><span class="p">(</span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span><span class="p">,</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
 <span class="go">18.858259026820352</span>
 </pre></div>
 </div>
 <p>Note that in this example translations have not been removed. In order
 to look at the pure rotation one needs to superimpose the centres of
 mass (or geometry) first:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ref0</span> <span class="o">=</span>  <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">centerOfMass</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mobile0</span> <span class="o">=</span>  <span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">centerOfMass</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">align</span><span class="o">.</span><span class="n">rmsd</span><span class="p">(</span><span class="n">mobile0</span><span class="p">,</span> <span class="n">ref0</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ref0</span> <span class="o">=</span>  <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mobile0</span> <span class="o">=</span>  <span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rms</span><span class="o">.</span><span class="n">rmsd</span><span class="p">(</span><span class="n">mobile0</span><span class="p">,</span> <span class="n">ref0</span><span class="p">)</span>
 <span class="go"> 6.8093965864717951</span>
 </pre></div>
 </div>
 <p>The rotation matrix that superimposes <em>mobile</em> on <em>ref</em> while
 minimizing the CA-RMSD is obtained with the
-<tt class="xref py py-func docutils literal"><span class="pre">rotation_matrix()</span></tt> function</p>
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/align.html#MDAnalysis.analysis.align.rotation_matrix" title="(in MDAnalysis v0.11)"><tt class="xref py py-func docutils literal"><span class="pre">rotation_matrix()</span></tt></a> function</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">R</span><span class="p">,</span> <span class="n">rmsd</span> <span class="o">=</span> <span class="n">align</span><span class="o">.</span><span class="n">rotation_matrix</span><span class="p">(</span><span class="n">mobile0</span><span class="p">,</span> <span class="n">ref0</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">rmsd</span>
 <span class="go">6.8093965864717951</span>
@@ -152,9 +152,9 @@ minimizing the CA-RMSD is obtained with the
 </pre></div>
 </div>
 <p>Putting all this together one can superimpose all of <em>mobile</em> onto <em>ref</em>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">centerOfMass</span><span class="p">())</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="o">-</span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">centerOfMass</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">CA</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mobile</span><span class="o">.</span><span class="n">atoms</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;mobile_on_ref.pdb&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -168,18 +168,18 @@ structure, when superimposed on the starting structure.</p>
 <ul>
 <li><p class="first">You will need to make a copy of the starting <em>reference</em>
 coordinates that are needed for the shifts, e.g.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">NMP</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 30:59&quot;</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">NMP</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;resid 30:59&quot;</span><span class="p">)</span>
 <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>   <span class="c"># make sure to be on initial frame</span>
-<span class="n">ref_com</span> <span class="o">=</span> <span class="n">NMP</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;name CA&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">centerOfMass</span><span class="p">()</span>
+<span class="n">ref_com</span> <span class="o">=</span> <span class="n">NMP</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;name CA&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
 <span class="n">ref0</span> <span class="o">=</span> <span class="n">NMP</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">ref_com</span>
 </pre></div>
 </div>
-<p>which is then used instead of <tt class="docutils literal"><span class="pre">ref.atoms.CA.centerOfMass()</span></tt>
+<p>which is then used instead of <tt class="docutils literal"><span class="pre">ref.atoms.CA.center_of_mass()</span></tt>
 (which would <em>change</em> for each time step).</p>
 </li>
 <li><p class="first">I suggest writing a function that does the superposition for a given
 time step, reference, and mobile <tt class="xref py py-class docutils literal"><span class="pre">AtomGroup</span></tt> to make the code
-more manageable (or use <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/align.html#MDAnalysis.analysis.align.alignto" title="(in MDAnalysis v0.8)"><tt class="xref py py-func docutils literal"><span class="pre">MDAnalysis.analysis.align.alignto()</span></tt></a>)</p>
+more manageable (or use <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/align.html#MDAnalysis.analysis.align.alignto" title="(in MDAnalysis v0.11)"><tt class="xref py py-func docutils literal"><span class="pre">MDAnalysis.analysis.align.alignto()</span></tt></a>)</p>
 </li>
 </ul>
 <p class="rubric">Possible solution</p>
@@ -188,11 +188,11 @@ more manageable (or use <a class="reference external" href="http://pythonhosted.
 <p>The code contains a function <tt class="xref py py-func docutils literal"><span class="pre">superpose()</span></tt> and <tt class="xref py py-func docutils literal"><span class="pre">rmsd()</span></tt>. The
 latter is marginally faster because we only need the calculated RMSD
 and not the full rotation matrix. (We are calling the lower-level
-function <a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/core/qcprot.html#MDAnalysis.core.qcprot.CalcRMSDRotationalMatrix" title="(in MDAnalysis v0.8)"><tt class="xref py py-func docutils literal"><span class="pre">MDAnalysis.core.qcprot.CalcRMSDRotationalMatrix()</span></tt></a>
+function <tt class="xref py py-func docutils literal"><span class="pre">MDAnalysis.core.qcprot.CalcRMSDRotationalMatrix()</span></tt>
 directly, which has somewhat non-intuitive calling
 conventions). <tt class="xref py py-func docutils literal"><span class="pre">superpose()</span></tt> also does the superposition of the
 mobile group to the references (but
-<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/align.html#MDAnalysis.analysis.align.alignto" title="(in MDAnalysis v0.8)"><tt class="xref py py-func docutils literal"><span class="pre">alignto()</span></tt></a> is actually a more flexible
+<a class="reference external" href="http://pythonhosted.org/MDAnalysis/documentation_pages/analysis/align.html#MDAnalysis.analysis.align.alignto" title="(in MDAnalysis v0.11)"><tt class="xref py py-func docutils literal"><span class="pre">alignto()</span></tt></a> is actually a more flexible
 tool for doing this). Otherwise it is mostly book-keeping, which is
 solved by organizing everything in dictionaries with keys &#8220;CORE&#8221;,
 &#8220;NMP&#8221;, &#8220;LID&#8221;.</p>
@@ -277,7 +277,7 @@ solved by organizing everything in dictionaries with keys &#8220;CORE&#8221;,
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c"># 995 us</span>
     <span class="n">xref_com</span> <span class="o">=</span> <span class="n">xref_com</span> <span class="k">if</span> <span class="n">xref_com</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
-    <span class="n">xmobile0</span> <span class="o">=</span> <span class="n">mobile</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">mobile</span><span class="o">.</span><span class="n">centerOfMass</span><span class="p">()</span>
+    <span class="n">xmobile0</span> <span class="o">=</span> <span class="n">mobile</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">mobile</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
     <span class="n">R</span><span class="p">,</span> <span class="n">rmsd</span> <span class="o">=</span> <span class="n">rotation_matrix</span><span class="p">(</span><span class="n">xmobile0</span><span class="p">,</span> <span class="n">xref0</span><span class="p">)</span>
     <span class="n">mobile</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
     <span class="n">mobile</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">xref_com</span><span class="p">)</span>
@@ -289,8 +289,8 @@ solved by organizing everything in dictionaries with keys &#8220;CORE&#8221;,
 <span class="sd">    The coordinates are not changed. No mass weighting.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c"># 738 us</span>
-    <span class="n">xmobile0</span> <span class="o">=</span> <span class="n">mobile</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">mobile</span><span class="o">.</span><span class="n">centerOfMass</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">CalcRMSDRotationalMatrix</span><span class="p">(</span><span class="n">xref0</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">xmobile0</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">mobile</span><span class="o">.</span><span class="n">numberOfAtoms</span><span class="p">(),</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">xmobile0</span> <span class="o">=</span> <span class="n">mobile</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">mobile</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">CalcRMSDRotationalMatrix</span><span class="p">(</span><span class="n">xref0</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">xmobile0</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span> <span class="n">mobile</span><span class="o">.</span><span class="n">n_atoms</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
@@ -304,14 +304,14 @@ solved by organizing everything in dictionaries with keys &#8220;CORE&#8221;,
 
     <span class="c"># one AtomGroup per domain</span>
     <span class="n">domains</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s">&#39;CORE&#39;</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;(resid 1:29 or resid 60:121 or resid 160:214) and name CA&quot;</span><span class="p">),</span>
-        <span class="s">&#39;LID&#39;</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 122-159 and name CA&quot;</span><span class="p">),</span>
-        <span class="s">&#39;NMP&#39;</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">selectAtoms</span><span class="p">(</span><span class="s">&quot;resid 30-59 and name CA&quot;</span><span class="p">),</span>
+        <span class="s">&#39;CORE&#39;</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;(resid 1:29 or resid 60:121 or resid 160:214) and name CA&quot;</span><span class="p">),</span>
+        <span class="s">&#39;LID&#39;</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;resid 122-159 and name CA&quot;</span><span class="p">),</span>
+        <span class="s">&#39;NMP&#39;</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="s">&quot;resid 30-59 and name CA&quot;</span><span class="p">),</span>
         <span class="p">}</span>
     <span class="n">colors</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;CORE&#39;</span><span class="p">:</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;NMP&#39;</span><span class="p">:</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;LID&#39;</span><span class="p">:</span> <span class="s">&#39;red&#39;</span><span class="p">}</span>
 
     <span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>   <span class="c"># rewind trajectory</span>
-    <span class="n">xref0</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">g</span><span class="o">.</span><span class="n">centerOfMass</span><span class="p">())</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span><span class="n">g</span> <span class="ow">in</span> <span class="n">domains</span><span class="o">.</span><span class="n">iteritems</span><span class="p">())</span>
+    <span class="n">xref0</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">g</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">())</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span><span class="n">g</span> <span class="ow">in</span> <span class="n">domains</span><span class="o">.</span><span class="n">iteritems</span><span class="p">())</span>
 
     <span class="n">nframes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">trajectory</span><span class="p">)</span>
     <span class="n">results</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nframes</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">domains</span><span class="p">)</span>
@@ -353,11 +353,11 @@ solved by organizing everything in dictionaries with keys &#8220;CORE&#8221;,
         <li class="right" >
           <a href="writing.html" title="Writing coordinates"
              >previous</a> |</li>
-        <li><a href="index.html">MDAnalysis Tutorial 0.1.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">MDAnalysis Tutorial 1.0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2014, Oliver Beckstein.
+        &copy; Copyright 2015, Oliver Beckstein.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
     </div>
   </body>

@@ -1,4 +1,4 @@
-.. -*- encoding: utf-8 -*-
+.. -*- coding: utf-8 -*-
 
 =======================================
  Using the MDAnalysis.analysis modules
@@ -20,7 +20,7 @@ between first and last frame is ::
 
     >>> import MDAnalysis.analysis.rms
     >>> u = MDAnalysis.Universe(PSF, DCD)
-    >>> bb = u.selectAtoms('backbone')
+    >>> bb = u.select_atoms('backbone')
     >>> A = bb.positions  # coordinates of first frame
     >>> u.trajectory[-1]      # forward to last frame
     >>> B = bb.positions  # coordinates of last frame
@@ -41,7 +41,7 @@ The example uses files provided as part of the MDAnalysis test suite
 examples execute first ::
 
    >>> import MDAnalysis
-   >>> from MDAnalysis.analysis import align
+   >>> from MDAnalysis.analysis import align, rms
    >>> from MDAnalysis.tests.datafiles import PSF, DCD, PDB_small
 
 
@@ -50,16 +50,16 @@ two structures, using :func:`~MDAnalysis.analysis.rms.rmsd`::
 
    >>> ref = MDAnalysis.Universe(PDB_small)
    >>> mobile = MDAnalysis.Universe(PSF,DCD)
-   >>> align.rmsd(mobile.atoms.CA.positions, ref.atoms.CA.positions)
+   >>> rms.rmsd(mobile.atoms.CA.positions, ref.atoms.CA.positions)
    18.858259026820352
 
 Note that in this example translations have not been removed. In order
 to look at the pure rotation one needs to superimpose the centres of
 mass (or geometry) first:
 
-   >>> ref0 =  ref.atoms.CA.positions - ref.atoms.CA.centerOfMass()
-   >>> mobile0 =  mobile.atoms.CA.positions - mobile.atoms.CA.centerOfMass()
-   >>> align.rmsd(mobile0, ref0)
+   >>> ref0 =  ref.atoms.CA.positions - ref.atoms.CA.center_of_mass()
+   >>> mobile0 =  mobile.atoms.CA.positions - mobile.atoms.CA.center_of_mass()
+   >>> rms.rmsd(mobile0, ref0)
     6.8093965864717951
 
 The rotation matrix that superimposes *mobile* on *ref* while
@@ -76,9 +76,9 @@ minimizing the CA-RMSD is obtained with the
 
 Putting all this together one can superimpose all of *mobile* onto *ref*::
 
-   >>> mobile.atoms.translate(-mobile.atoms.CA.centerOfMass())
+   >>> mobile.atoms.translate(-mobile.atoms.CA.center_of_mass())
    >>> mobile.atoms.rotate(R)
-   >>> mobile.atoms.translate(ref.atoms.CA.centerOfMass())
+   >>> mobile.atoms.translate(ref.atoms.CA.center_of_mass())
    >>> mobile.atoms.write("mobile_on_ref.pdb")
 
 
@@ -94,12 +94,12 @@ structure, when superimposed on the starting structure.
 *  You will need to make a copy of the starting *reference*
    coordinates that are needed for the shifts, e.g. ::
 
-     NMP = u.selectAtoms("resid 30:59")
+     NMP = u.select_atoms("resid 30:59")
      u.trajectory[0]   # make sure to be on initial frame
-     ref_com = NMP.selectAtoms("name CA").centerOfMass()
+     ref_com = NMP.select_atoms("name CA").center_of_mass()
      ref0 = NMP.positions - ref_com
 
-   which is then used instead of ``ref.atoms.CA.centerOfMass()``
+   which is then used instead of ``ref.atoms.CA.center_of_mass()``
    (which would *change* for each time step).
 
 * I suggest writing a function that does the superposition for a given
@@ -129,8 +129,8 @@ solved by organizing everything in dictionaries with keys "CORE",
 
 .. _MDAnalysis.analysis: http://pythonhosted.org/MDAnalysis/documentation_pages/analysis_modules.html
 .. _Examples: 
-   https://code.google.com/p/mdanalysis/wiki/Examples
+   http://wiki.mdanalysis.org/Examples
 .. _example scripts:
-   http://code.google.com/p/mdanalysis/source/browse/#git%2Fpackage%2Fexamples
+   https://github.com/MDAnalysis/mdanalysis/tree/develop/package/examples
 
 
