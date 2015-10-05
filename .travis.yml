@@ -25,7 +25,7 @@ env:
   global:
   - secure: VJMbuUqJRAqU5bteMAlvMrNLrce4LVZQwx4HRC9XWQ5tdtQZ/9kNeMqAEYGWWscCceyyQZvKXb2E0hgHR8psbFO98S/aMFt/B5ZKSbDEjIXAafDuBi00dDBab5TwbVi072jSIIfjhqnPAZperfbxO1J9+XnwOQyOYv1xFFNGZYp14hEALyAv+wpdgnKi59ns0NjQo4H1maQuVAyf+7GvLHW7AacBCaL8MY3ArN1ENmGKWMDh+IKvwrszqBlTJEbacpZMF8e+pl4gSKoShAv4O2HLqnP2l6WWrzcA+zzuVPNrfDSo4Eq1DwE2PWAtHKqlu7twbSWqU9q16OwxXmiPk7g2kQHliTHJbcMAyyQsLNCjFUa+xIXEeb4fsFadqz5/v8NW7IgqfVH0ThMuV8DLWy+wU8II169+z8wu3FPGhTLpW8yCbYxEcypeqhYtgod4HVWyGhU8WNzqpiL+gvbkCwhEMGb3ZOwZKdBc9dyCz/unHLSD3ipDJRr2bVsnkuPTOO2y0K1oziayVBF+jJ7fN2EDKsVmWdUQFXNjTAyc8jhC4il9UgebFZw2v3TqyDJSb9Tg5t9F1mAmlf9XwM+ocIG9kmtXXA0cmaoGWcE8fAXAr1SVjkRUgHsiljf4L1uv2W+EwWFEDLnJ7AdOWi2+30vmlRDFsMWIiABAUg1LfHI=
   - GH_DOC_BRANCH: master
-  - GH_REPOSITORY: github.com/MDAnalysis/MDAnalysisTutorial.git
+  - GH_REPOSITORY: github.com/Becksteinlab/MDAnalysis-workshop.git
   - GIT_CI_USER: TravisCI
   - GIT_CI_EMAIL: TravisCI@mdanalysis.org
   - MDA_DOCDIR: doc/pages/html
