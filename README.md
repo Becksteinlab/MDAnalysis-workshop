@@ -1,5 +1,17 @@
 # MDAnalysis Tutorial at the 2015 CECAM Macromolecular simulation software workshop
 
+## For Participants
+
+Please follow the [preparation
+instructions](http://becksteinlab.github.io/MDAnalysis-workshop) in
+advanced of the tutorial session on *Wed Oct 14, 2015*. You need to
+
+* [install MDAnalysis](http://becksteinlab.github.io/MDAnalysis-workshop/installation.html#chapter-installing-mdanalysis) on your laptop
+* [download the example data](http://becksteinlab.github.io/MDAnalysis-workshop/datadownload.html#chapter-datadownload)
+
+
+## Background
+
 The [CECAM Macromolecular simulation software
 workshop](http://www.cecam.org/workshop-0-1214.html) contains a [CECAM
 analysing simulation data
