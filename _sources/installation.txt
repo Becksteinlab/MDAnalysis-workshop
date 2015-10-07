@@ -16,12 +16,14 @@ You will need a working installation of MDAnalysis_ on your **Linux** or **Mac
 OS X** laptop. Windows is not supported at this time but Windows users can try
 to use a `virtual machine with MDAnalysis pre-installed`_.
 
-.. Note:: For this tutorial, you will need at least version
-          |MDAnalysis_version| of MDAnalysis (which should be automatically
-	  installed).
+For this tutorial, you will need at least version |MDAnalysis_version| of
+MDAnalysis (which should be automatically installed when you follow the
+instructions below).
 
 The installation recipes will install *MDAnalysis*, *MDAnalysisTests* (test
-cases), and all required libraries and Python packages.
+cases) [#otherdownloads]_, and all required libraries and Python packages.
+
+.. note:: If you have problems at any stage, ask for :ref:`help`.
 
 
 
@@ -48,7 +50,9 @@ are using the Linux 64 bit one. Common choices:
 - Mac OS X (64 bit): https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh
 
 Run the installer to install the :program:`conda` package manager and the
-necessary packages::
+necessary packages:
+
+.. code-block:: bash
 
    # example for Linux x86_64 
    wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
@@ -71,13 +75,17 @@ necessary packages::
 
 - The installation is performed in the `virtual environment
   <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_ named **mdaenv**,
-  which must be activated for use in the each shell session::
+  which must be activated for use in the each shell session:
 
-    source  activate mdaenv 
+  .. code-block:: bash
+
+     source  activate mdaenv 
 
   (For more technical details see `virtualenv
   <https://virtualenv.pypa.io/en/latest/>`_.)
-- Add the line ::
+- Add the line:
+
+  .. code-block:: bash
 
      export PATH=${HOME}/miniconda/bin:$PATH
 
@@ -111,7 +119,9 @@ Linux
 Ubuntu 14.04
 ````````````
 
-Recent Ubuntu distributions::
+Recent Ubuntu distributions:
+
+.. code-block:: bash
 
    sudo apt-get update
    sudo apt-get install -y build-essential python-dev python-setuptools python-pip
@@ -125,7 +135,9 @@ Recent Ubuntu distributions::
 Debian 7.6, 7.8 Wheezy
 ``````````````````````
 
-Most recent Debian distributions should all work with the following::
+Most recent Debian distributions should all work with the following:
+
+.. code-block:: bash
 
    sudo apt-get update
    sudo apt-get install -y build-essential python-dev python-setuptools python-pip
@@ -143,7 +155,9 @@ Mac OS X (≥ 10.6.8)
 Macports
 ````````
 
-Using macports_::
+Using macports_:
+
+.. code-block:: bash
 
    sudo port install py27-numpy  py27-cython
    sudo port install py27-scipy  py27-matplotlib py27-biopython py27-ipython+notebook
@@ -152,6 +166,8 @@ Using macports_::
    sudo pip install netCDF4
    sudo pip install MDAnalysis MDAnalysisTests
 
+
+.. _help:
 
 Help!
 =====
@@ -177,3 +193,7 @@ If nothing else works you can also use a complete installation inside a
 .. _issue tracker: https://github.com/MDAnalysis/mdanalysis/issues
 
 
+.. rubric:: Footnotes
+
+.. [#otherdownloads] For the workshop you will also need to additionally :ref:`download
+                     example trajectories<chapter-datadownload>`.
