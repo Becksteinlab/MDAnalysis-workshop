@@ -1,124 +1,179 @@
 .. -*- coding: utf-8 -*-
 
-.. _chapter-installing-mdanalysis:
-
-=======================
- Installing MDAnalysis
-=======================
-
-Before you can start the tutorial, you need a working installation of
-MDAnalysis_ (with its test suite, MDAnalysisTests_) on your Linux or Mac
-OS X machine. The following contains hints and links to further
-documentation to facilitate installation of the package. In an ideal
-setting (development tools (gcc tool chain), python development
-headers, full scientific Python stack with numpy, scipy, matplotlib
-already installed, working netcdf/HDF5 library), installation will be
-as simple as ::
-
-   pip install --user MDAnalysis MDAnalysisTests
-
-In a less ideal setting, one typically has to install additional
-packages through the distribution's package manager as described in
-the links under :ref:`local-installation`. Alternatively, for this
-tutorial one can also set up a Linux :ref:`virtual-machine` that
-installs itself with everything needed and the most recent release of
-MDAnalysis.
-
-.. Note:: For this tutorial, you will need at least version
-          |MDAnalysis_version| of MDAnalysis.
-
 .. _MDAnalysis: http://www.mdanalysis.org
 .. _MDAnalysisTests: http://wiki.mdanalysis.org/UnitTests
+.. _conda: http://conda.pydata.org/
+.. _pip: https://pip.pypa.io/en/stable/
+.. _macports: https://www.macports.org/
+
+.. _chapter-installing-mdanalysis:
+
+======================================
+ MDAnalysis installation instructions
+======================================
+
+You will need a working installation of MDAnalysis_ on your **Linux** or **Mac
+OS X** laptop. Windows is not supported at this time but Windows users can try
+to use a `virtual machine with MDAnalysis pre-installed`_.
+
+.. Note:: For this tutorial, you will need at least version
+          |MDAnalysis_version| of MDAnalysis (which should be automatically
+	  installed).
+
+The installation recipes will install *MDAnalysis*, *MDAnalysisTests* (test
+cases), and all required libraries and Python packages.
+
 
 
 Installation methods
 ====================
 
-.. _local-installation:
+We tested two approaches to install MDAnalysis and all its dependencies. The
+:ref:`first approach<conda-installation>` is based on the `conda`_ package
+management system and is recommended for anyone new to scientific computing
+with Python (or if the :ref:`second approach<distribution-pip-installation>`
+fails).
 
-Local installation
-------------------
 
-The latest release of MDAnalysis_ (and the full test suite) can be
-installed from the python package index with pip_ ::
+.. _conda-installation:
 
-  pip install --user MDAnalysis MDAnalysisTests
+Conda-based
+-----------
 
-(Installation of the test suite is required for this tutorial because
-we will use some of the data files that are part of the tests.)
+Get the appropriate `miniconda installer
+<http://conda.pydata.org/miniconda.html>`_ for Python 2.7; in the example we
+are using the Linux 64 bit one. Common choices:
 
-If there are problems then please have a closer look at the
-`installation notes`_ and the `installation recipes`_; in particular,
-`installing the netcdf library`_ can become more involved.
+- Linux x86_64 (64 bit): https://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
+- Mac OS X (64 bit): https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh
 
-If you need help with installation issues, please do not hesitate to
-ask on the `user discussion group`_.
+Run the installer to install the :program:`conda` package manager and the
+necessary packages::
 
-For this tutorial you can also alternatively use a complete
-installation inside a :ref:`virtual-machine`.
+   # example for Linux x86_64 
+   wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+ 
+   # for Mac OS X, uncomment the following line and comment the preceding one
+   # wget https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh
 
-.. _pip: http://www.pip-installer.org/en/latest/index.html
+   # from here on use the same commands for Linux/Mac OS X
+   chmod +x miniconda.sh
+   ./miniconda.sh -b
+   export PATH=${HOME}/miniconda/bin:$PATH
+   conda update --yes conda
+   conda create --yes -n mdaenv python=2.7 numpy=1.9.2 scipy=0.16 nose=1.3.7 ipython
+   source activate mdaenv
+   conda install --yes python=2.7 cython biopython matplotlib networkx netcdf4
+
+   # install the latest release of MDAnalysis (≥ 0.11.0)
+   pip install --upgrade MDAnalysis 
+   pip install --no-cache-dir --upgrade MDAnalysisTests
+
+- The installation is performed in the `virtual environment
+  <http://docs.python-guide.org/en/latest/dev/virtualenvs/>`_ named **mdaenv**,
+  which must be activated for use in the each shell session::
+
+    source  activate mdaenv 
+
+  (For more technical details see `virtualenv
+  <https://virtualenv.pypa.io/en/latest/>`_.)
+- Add the line ::
+
+     export PATH=${HOME}/miniconda/bin:$PATH
+
+  to your shell start-up file (e.g. ``~/.bashrc``) so that the ``activate``
+  script and other commands are found.
+- The ``--no-cache-dir`` option for :program:`pip` may be necessary to avoid a
+  ``MemoryError`` in low-memory environments such as our virtual machines; with
+  lots of memory you may omit it (see `pip issue #2984
+  <https://github.com/pypa/pip/issues/2984>`_).
+- :program:`conda` will also install the HDF5 and netcdf libraries for you so
+  you will have a *full feature* installation of MDAnalysis
+
+
+.. _distribution-pip-installation: 
+
+Pip and distribution package manager
+------------------------------------
+
+We use the distribution's package manager for most of the pre-requisites and
+install any remaining packages (and MDAnalysis) with pip_.
+
+Linux
+~~~~~
+
+.. Note:: 
+
+   All installations of pre-requisites are performed in system directories and
+   require root access (via the ``sudo`` command). MDAnalysis can also be
+   installed in a user directory by providing the ``--user`` option to pip_.
+
+Ubuntu 14.04
+````````````
+
+Recent Ubuntu distributions::
+
+   sudo apt-get update
+   sudo apt-get install -y build-essential python-dev python-setuptools python-pip
+   sudo apt-get install -y python-numpy python-scipy python-matplotlib python-biopython python-networkx ipython
+   sudo apt-get install -y libhdf5-serial-dev libnetcdf-dev
+   
+   sudo pip install netCDF4
+   sudo pip install MDAnalysis MDAnalysisTests
+
+
+Debian 7.6, 7.8 Wheezy
+``````````````````````
+
+Most recent Debian distributions should all work with the following::
+
+   sudo apt-get update
+   sudo apt-get install -y build-essential python-dev python-setuptools python-pip
+   sudo apt-get install -y python-numpy python-scipy python-matplotlib python-biopython python-networkx ipython
+   sudo apt-get install -y libhdf5-serial-dev libnetcdf-dev
+   
+   sudo pip install netCDF4
+   sudo pip install MDAnalysis MDAnalysisTests
+
+
+
+Mac OS X (≥ 10.6.8)
+~~~~~~~~~~~~~~~~~~~
+
+Macports
+````````
+
+Using macports_::
+
+   sudo port install py27-numpy  py27-cython
+   sudo port install py27-scipy  py27-matplotlib py27-biopython py27-ipython+notebook
+   sudo port install hdf5 netcdf+dap+netcdf4
+   
+   sudo pip install netCDF4
+   sudo pip install MDAnalysis MDAnalysisTests
+
+
+Help!
+=====
+
+If there are problems then please have a closer look at the `installation
+notes`_ and the `installation recipes`_; in particular, `installing the netcdf
+library`_ can become more involved.
+
+If you need help with installation issues, please do not hesitate to ask on the
+`user discussion group`_ or via the `issue tracker`_.
+
+If nothing else works you can also use a complete installation inside a
+`virtual machine with MDAnalysis pre-installed`_.
+
 .. _installation notes: http://wiki.mdanalysis.org/Install
 .. _installation recipes: http://wiki.mdanalysis.org/InstallRecipes
 .. _installing the netcdf library: http://wiki.mdanalysis.org/netcdf
 .. _user discussion group: http://groups.google.com/group/mdnalysis-discussion
 .. _tutorial git repository: https://github.com/MDAnalysis/MDAnalysisTutorial
 .. _`vm/README.rst`: https://github.com/MDAnalysis/MDAnalysisTutorial/tree/master/vm
-
-.. _virtual-machine:
-
-Virtual machine
----------------
-
-You will first need to clone the `tutorial git repository`_ with
-:program:`git`::
-
-  git clone https://github.com/MDAnalysis/MDAnalysisTutorial.git 
-  cd MDAnalysisTutorial
-
-The directory ``vm`` contains configuration files for `vagrant`_
-virtual machines (VM) (using `VirtualBox`_). The file `vm/README.rst`_
-describes setup in more detail but provided that `vagrant`_ and
-`VirtualBox`_ are installed, the following should provide you with a
-working VM::
-
-  cd vm/Ubuntu/14.04
-  vagrant up
-  vagrant ssh
-
-When you are done, just exit the ssh session (``exit`` or Control-D)
-and halt the VM::
-
-  vagrant halt
-
-You can access your real home directory (:envvar:`$HOME`) in the virtual
-machine at the path ``/myhome``. Anything that you do in this
-directory will be reflected in your real home directory, including
-deletion of files!
-
-.. _Vagrant: https://www.vagrantup.com/
-.. _VirtualBox: https://www.virtualbox.org/
-
-
-
-Testing the installation
-========================
-
-.. _test cases: http://wiki.mdanalysis.org/UnitTests
-
-MDAnalysis comes with over 2500 `test cases`_ that check its
-functionality. These test cases can be run with the command ::
-
-  python -c 'from MDAnalysis.tests import test; test(label="full", verbose=3, extra_argv=["--exe"])'
-
-This can take a few minutes. Ideally, you should only get passing
-tests ("ok" or just a single dot "." when using :code:`verbose=1`) or
-"KnownFailures".
-
-.. Note:: 
-   The test suite consumes a considerable amount of memory (> 4GB) and
-   thus it might fail or become very slow on machines with
-   insufficient memory such as a :ref:`virtual-machine`. (This is a known
-   problem with the test suite and will be addressed in the future.)
+.. _`virtual machine with MDAnalysis pre-installed`: 
+   http://www.mdanalysis.org/MDAnalysisTutorial/installation.html#virtual-machine
+.. _issue tracker: https://github.com/MDAnalysis/mdanalysis/issues
 
 

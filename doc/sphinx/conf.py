@@ -49,15 +49,15 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'MDAnalysis Tutorial'
-copyright = u'2015, Oliver Beckstein'
+project = u'MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop'
+copyright = u'2015, Oliver Beckstein, David Dotson'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '1.0.2'
+release = '1.0.0'
 # The short X.Y version.
 version = ".".join(release.split('.')[:2])
 
@@ -284,7 +284,7 @@ texinfo_documents = [
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'http://docs.python.org/': None,
                        'http://pythonhosted.org/MDAnalysis': None,
-                       'http://matplotlib.org': None,
+                       #'http://matplotlib.org': None,
                        'http://docs.scipy.org/doc/numpy/': None,
                        #'http://docs.scipy.org/doc/scipy/reference/': None,
                        #'http://networkx.github.io/documentation/latest/': None,
