@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Index &mdash; MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.0 documentation</title>
+    <title>Testing the installation &mdash; MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,15 +25,23 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.0 documentation" href="index.html" /> 
+    <link rel="top" title="MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.0 documentation" href="index.html" />
+    <link rel="next" title="Data Download" href="datadownload.html" />
+    <link rel="prev" title="MDAnalysis installation instructions" href="installation.html" /> 
   </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="#" title="General Index"
+          <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="datadownload.html" title="Data Download"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="MDAnalysis installation instructions"
+             accesskey="P">previous</a> |</li>
         <li><a href="index.html">MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
@@ -43,9 +50,17 @@
             <p class="logo"><a href="index.html">
               <img class="logo" src="_static/mdanalysistutorial-logo-200x150.png" alt="Logo"/>
             </a></p>
-
-   
-
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">MDAnalysis installation instructions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="datadownload.html"
+                        title="next chapter">Data Download</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/testing.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -67,11 +82,24 @@
         <div class="bodywrapper">
           <div class="body">
             
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+  <div class="section" id="testing-the-installation">
+<h1>Testing the installation<a class="headerlink" href="#testing-the-installation" title="Permalink to this headline">¶</a></h1>
+<p>MDAnalysis comes with over 2500 <a class="reference external" href="http://wiki.mdanalysis.org/UnitTests">test cases</a> that check its
+functionality. These test cases can be run with the command</p>
+<div class="highlight-python"><div class="highlight"><pre>python -c &#39;from MDAnalysis.tests import test; test(label=&quot;full&quot;,  \
+           extra_argv=[&quot;--exe&quot;, &quot;--processes=4&quot;, &quot;--process-timeout=120&quot;])&#39;
+</pre></div>
+</div>
+<p>Depending on how many parallel processes (4 in the example) you can use, this
+can take from a minute to 20 minutes. Ideally, you should only get
+passing tests (&#8220;ok&#8221; or just a single dot &#8221;.&#8221;) or &#8220;KnownFailures&#8221; (K).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The test suite consumes a considerable amount of memory (&gt; 4GB) and thus it
+might fail or become very slow on machines with insufficient memory such as
+a virtual machine. (This is a known problem with the test suite and will be
+addressed in the future.)</p>
+</div>
 </div>
 
 
@@ -84,8 +112,14 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="#" title="General Index"
+          <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="datadownload.html" title="Data Download"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="MDAnalysis installation instructions"
+             >previous</a> |</li>
         <li><a href="index.html">MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
