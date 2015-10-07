@@ -9,10 +9,12 @@
 
 Download a set of trajectories for the tutorial (equilibrium trajectories and
 DIMS trajectories) from dropbox `CECAM_Workshop/MDAnalysis`_. You can do all of
-it from the commandline with `curl`_::
+it from the commandline with `curl`_:
 
-  curl -o mdatrj.zip -L 'https://www.dropbox.com/sh/am6y00kac8myihe/AABDiQI28fWnRZueQTT7W2s1a?dl=1'
-  unzip mdatrj.zip && rm mdatrj.zip
+.. code-block:: bash
+
+   curl -o mdatrj.zip -L 'https://www.dropbox.com/sh/am6y00kac8myihe/AABDiQI28fWnRZueQTT7W2s1a?dl=1'
+   unzip mdatrj.zip && rm mdatrj.zip
 
 You should now have two directories named ``equilibrium/`` and ``dims/``
 containing PSF and DCD files.

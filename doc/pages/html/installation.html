@@ -62,7 +62,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#mac-os-x-10-6-8">Mac OS X (≥ 10.6.8)</a><ul>
-<li><a class="reference internal" href="#id1">Macports</a></li>
+<li><a class="reference internal" href="#id2">Macports</a></li>
 </ul>
 </li>
 </ul>
@@ -113,14 +113,15 @@
 <p>You will need a working installation of <a class="reference external" href="http://www.mdanalysis.org">MDAnalysis</a> on your <strong>Linux</strong> or <strong>Mac
 OS X</strong> laptop. Windows is not supported at this time but Windows users can try
 to use a <a class="reference external" href="http://www.mdanalysis.org/MDAnalysisTutorial/installation.html#virtual-machine">virtual machine with MDAnalysis pre-installed</a>.</p>
+<p>For this tutorial, you will need at least version 0.11 of
+MDAnalysis (which should be automatically installed when you follow the
+instructions below).</p>
+<p>The installation recipes will install <em>MDAnalysis</em>, <em>MDAnalysisTests</em> (test
+cases) <a class="footnote-reference" href="#otherdownloads" id="id1">[1]</a>, and all required libraries and Python packages.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">For this tutorial, you will need at least version
-0.11 of MDAnalysis (which should be automatically
-installed).</p>
+<p class="last">If you have problems at any stage, ask for <a class="reference internal" href="#help"><span>Help!</span></a>.</p>
 </div>
-<p>The installation recipes will install <em>MDAnalysis</em>, <em>MDAnalysisTests</em> (test
-cases), and all required libraries and Python packages.</p>
 <div class="section" id="installation-methods">
 <h2>Installation methods<a class="headerlink" href="#installation-methods" title="Permalink to this headline">¶</a></h2>
 <p>We tested two approaches to install MDAnalysis and all its dependencies. The
@@ -138,22 +139,22 @@ are using the Linux 64 bit one. Common choices:</p>
 </ul>
 <p>Run the installer to install the <strong class="program">conda</strong> package manager and the
 necessary packages:</p>
-<div class="highlight-python"><div class="highlight"><pre># example for Linux x86_64
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># example for Linux x86_64</span>
 wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
 
-# for Mac OS X, uncomment the following line and comment the preceding one
-# wget https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh
+<span class="c"># for Mac OS X, uncomment the following line and comment the preceding one</span>
+<span class="c"># wget https://repo.continuum.io/miniconda/Miniconda-latest-MacOSX-x86_64.sh</span>
 
-# from here on use the same commands for Linux/Mac OS X
+<span class="c"># from here on use the same commands for Linux/Mac OS X</span>
 chmod +x miniconda.sh
 ./miniconda.sh -b
-export PATH=${HOME}/miniconda/bin:$PATH
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/miniconda/bin:<span class="nv">$PATH</span>
 conda update --yes conda
-conda create --yes -n mdaenv python=2.7 numpy=1.9.2 scipy=0.16 nose=1.3.7 ipython
-source activate mdaenv
-conda install --yes python=2.7 cython biopython matplotlib networkx netcdf4
+conda create --yes -n mdaenv <span class="nv">python</span><span class="o">=</span>2.7 <span class="nv">numpy</span><span class="o">=</span>1.9.2 <span class="nv">scipy</span><span class="o">=</span>0.16 <span class="nv">nose</span><span class="o">=</span>1.3.7 ipython
+<span class="nb">source </span>activate mdaenv
+conda install --yes <span class="nv">python</span><span class="o">=</span>2.7 cython biopython matplotlib networkx netcdf4
 
-# install the latest release of MDAnalysis (≥ 0.11.0)
+<span class="c"># install the latest release of MDAnalysis (≥ 0.11.0)</span>
 pip install --upgrade MDAnalysis
 pip install --no-cache-dir --upgrade MDAnalysisTests
 </pre></div>
@@ -161,13 +162,13 @@ pip install --no-cache-dir --upgrade MDAnalysisTests
 <ul>
 <li><p class="first">The installation is performed in the <a class="reference external" href="http://docs.python-guide.org/en/latest/dev/virtualenvs/">virtual environment</a> named <strong>mdaenv</strong>,
 which must be activated for use in the each shell session:</p>
-<div class="highlight-python"><div class="highlight"><pre>source  activate mdaenv
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">source  </span>activate mdaenv
 </pre></div>
 </div>
 <p>(For more technical details see <a class="reference external" href="https://virtualenv.pypa.io/en/latest/">virtualenv</a>.)</p>
 </li>
-<li><p class="first">Add the line</p>
-<div class="highlight-python"><div class="highlight"><pre>export PATH=${HOME}/miniconda/bin:$PATH
+<li><p class="first">Add the line:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/miniconda/bin:<span class="nv">$PATH</span>
 </pre></div>
 </div>
 <p>to your shell start-up file (e.g. <code class="docutils literal"><span class="pre">~/.bashrc</span></code>) so that the <code class="docutils literal"><span class="pre">activate</span></code>
@@ -197,7 +198,7 @@ installed in a user directory by providing the <code class="docutils literal"><s
 <div class="section" id="ubuntu-14-04">
 <h5>Ubuntu 14.04<a class="headerlink" href="#ubuntu-14-04" title="Permalink to this headline">¶</a></h5>
 <p>Recent Ubuntu distributions:</p>
-<div class="highlight-python"><div class="highlight"><pre>sudo apt-get update
+<div class="highlight-bash"><div class="highlight"><pre>sudo apt-get update
 sudo apt-get install -y build-essential python-dev python-setuptools python-pip
 sudo apt-get install -y python-numpy python-scipy python-matplotlib python-biopython python-networkx ipython
 sudo apt-get install -y libhdf5-serial-dev libnetcdf-dev
@@ -210,7 +211,7 @@ sudo pip install MDAnalysis MDAnalysisTests
 <div class="section" id="debian-7-6-7-8-wheezy">
 <h5>Debian 7.6, 7.8 Wheezy<a class="headerlink" href="#debian-7-6-7-8-wheezy" title="Permalink to this headline">¶</a></h5>
 <p>Most recent Debian distributions should all work with the following:</p>
-<div class="highlight-python"><div class="highlight"><pre>sudo apt-get update
+<div class="highlight-bash"><div class="highlight"><pre>sudo apt-get update
 sudo apt-get install -y build-essential python-dev python-setuptools python-pip
 sudo apt-get install -y python-numpy python-scipy python-matplotlib python-biopython python-networkx ipython
 sudo apt-get install -y libhdf5-serial-dev libnetcdf-dev
@@ -223,10 +224,10 @@ sudo pip install MDAnalysis MDAnalysisTests
 </div>
 <div class="section" id="mac-os-x-10-6-8">
 <h4>Mac OS X (≥ 10.6.8)<a class="headerlink" href="#mac-os-x-10-6-8" title="Permalink to this headline">¶</a></h4>
-<div class="section" id="id1">
-<h5>Macports<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
+<div class="section" id="id2">
+<h5>Macports<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h5>
 <p>Using <a class="reference external" href="https://www.macports.org/">macports</a>:</p>
-<div class="highlight-python"><div class="highlight"><pre>sudo port install py27-numpy  py27-cython
+<div class="highlight-bash"><div class="highlight"><pre>sudo port install py27-numpy  py27-cython
 sudo port install py27-scipy  py27-matplotlib py27-biopython py27-ipython+notebook
 sudo port install hdf5 netcdf+dap+netcdf4
 
@@ -239,7 +240,7 @@ sudo pip install MDAnalysis MDAnalysisTests
 </div>
 </div>
 <div class="section" id="help">
-<h2>Help!<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h2>
+<span id="id3"></span><h2>Help!<a class="headerlink" href="#help" title="Permalink to this headline">¶</a></h2>
 <p>If there are problems then please have a closer look at the <a class="reference external" href="http://wiki.mdanalysis.org/Install">installation
 notes</a> and the <a class="reference external" href="http://wiki.mdanalysis.org/InstallRecipes">installation recipes</a>; in particular, <a class="reference external" href="http://wiki.mdanalysis.org/netcdf">installing the netcdf
 library</a> can become more involved.</p>
@@ -247,6 +248,14 @@ library</a> can become more involved.</p>
 <a class="reference external" href="http://groups.google.com/group/mdnalysis-discussion">user discussion group</a> or via the <a class="reference external" href="https://github.com/MDAnalysis/mdanalysis/issues">issue tracker</a>.</p>
 <p>If nothing else works you can also use a complete installation inside a
 <a class="reference external" href="http://www.mdanalysis.org/MDAnalysisTutorial/installation.html#virtual-machine">virtual machine with MDAnalysis pre-installed</a>.</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="otherdownloads" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>For the workshop you will also need to additionally <a class="reference internal" href="datadownload.html#chapter-datadownload"><span>download
+example trajectories</span></a>.</td></tr>
+</tbody>
+</table>
 </div>
 </div>
 

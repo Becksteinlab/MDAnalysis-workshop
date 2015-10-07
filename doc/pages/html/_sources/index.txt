@@ -43,11 +43,11 @@ you should
 
 .. Note:: 
 
-   Please compled these two tasks well in advance of the workshop
+   Please complete these two tasks well in advance of the workshop
    because there will be very little time to do this during the
-   tutorial session. The test data are about 300 MiB and downloading
-   over a WiFi connection with 25 other people attempting to do the
-   same will almost certainly fail.
+   tutorial session. The example data real-world trajectories are
+   about 300 MiB and downloading over a WiFi connection with 25 other
+   people attempting to do the same will almost certainly fail.
 
 
 Contents

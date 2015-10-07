@@ -88,8 +88,8 @@
 <h1>Testing the installation<a class="headerlink" href="#testing-the-installation" title="Permalink to this headline">¶</a></h1>
 <p>MDAnalysis comes with over 2500 <a class="reference external" href="http://wiki.mdanalysis.org/UnitTests">test cases</a> that check its
 functionality. These test cases can be run with the command</p>
-<div class="highlight-python"><div class="highlight"><pre>python -c &#39;from MDAnalysis.tests import test; test(label=&quot;full&quot;,  \
-           extra_argv=[&quot;--exe&quot;, &quot;--processes=4&quot;, &quot;--process-timeout=120&quot;])&#39;
+<div class="highlight-bash"><div class="highlight"><pre>python -c <span class="s1">&#39;from MDAnalysis.tests import test; test(label=&quot;full&quot;,  \</span>
+<span class="s1">           extra_argv=[&quot;--exe&quot;, &quot;--processes=4&quot;, &quot;--process-timeout=120&quot;])&#39;</span>
 </pre></div>
 </div>
 <p>Depending on how many parallel processes (4 in the example) you can use, this
