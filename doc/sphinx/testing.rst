@@ -4,10 +4,12 @@ Testing the installation
 ========================
 
 MDAnalysis comes with over 2500 `test cases`_ that check its
-functionality. These test cases can be run with the command ::
+functionality. These test cases can be run with the command
 
-  python -c 'from MDAnalysis.tests import test; test(label="full",  \
-             extra_argv=["--exe", "--processes=4", "--process-timeout=120"])'
+.. code-block:: bash
+
+   python -c 'from MDAnalysis.tests import test; test(label="full",  \
+              extra_argv=["--exe", "--processes=4", "--process-timeout=120"])'
 
 Depending on how many parallel processes (4 in the example) you can use, this
 can take from a minute to 20 minutes. Ideally, you should only get
