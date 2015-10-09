@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>conda-based installation of MDAnalysis &mdash; MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.1 documentation</title>
+    <title>conda-based installation of MDAnalysis &mdash; MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.0.1',
+        VERSION:     '1.0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.1 documentation" href="index.html" />
+    <link rel="top" title="MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.2 documentation" href="index.html" />
     <link rel="up" title="MDAnalysis installation instructions" href="installation.html" />
     <link rel="next" title="pip and native distribution package manager installation of MDAnalysis" href="install_native_pip.html" />
     <link rel="prev" title="MDAnalysis installation instructions" href="installation.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="installation.html" title="MDAnalysis installation instructions"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.1 documentation</a> &raquo;</li>
+        <li><a href="index.html">MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.2 documentation</a> &raquo;</li>
           <li><a href="installation.html" accesskey="U">MDAnalysis installation instructions</a> &raquo;</li> 
       </ul>
     </div>
@@ -105,7 +105,7 @@ chmod +x miniconda.sh
 ./miniconda.sh -b
 <span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">HOME</span><span class="si">}</span>/miniconda/bin:<span class="nv">$PATH</span>
 conda update --yes conda
-conda create --yes -n mdaenv <span class="nv">python</span><span class="o">=</span>2.7 <span class="nv">numpy</span><span class="o">=</span>1.9.2 <span class="nv">scipy</span><span class="o">=</span>0.16 <span class="nv">nose</span><span class="o">=</span>1.3.7 ipython
+conda create --yes -n mdaenv <span class="nv">python</span><span class="o">=</span>2.7 <span class="nv">numpy</span><span class="o">=</span>1.9.2 <span class="nv">scipy</span><span class="o">=</span>0.16 <span class="nv">nose</span><span class="o">=</span>1.3.7 ipython ipython-notebook ipython-qtconsole
 <span class="nb">source </span>activate mdaenv
 conda install --yes <span class="nv">python</span><span class="o">=</span>2.7 cython biopython matplotlib networkx netcdf4
 
@@ -136,6 +136,9 @@ lots of memory you may omit it (see <a class="reference external" href="https://
 <li><p class="first"><strong class="program">conda</strong> will also install the HDF5 and netcdf libraries for you so
 you will have a <em>full feature</em> installation of MDAnalysis</p>
 </li>
+<li><p class="first">You will also get <a class="reference external" href="http://ipython.org">ipython</a> with its Jupyter
+notebook interface.</p>
+</li>
 </ul>
 </div>
 
@@ -157,7 +160,7 @@ you will have a <em>full feature</em> installation of MDAnalysis</p>
         <li class="right" >
           <a href="installation.html" title="MDAnalysis installation instructions"
              >previous</a> |</li>
-        <li><a href="index.html">MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.1 documentation</a> &raquo;</li>
+        <li><a href="index.html">MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.2 documentation</a> &raquo;</li>
           <li><a href="installation.html" >MDAnalysis installation instructions</a> &raquo;</li> 
       </ul>
     </div>
