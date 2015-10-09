@@ -33,7 +33,7 @@ necessary packages:
    ./miniconda.sh -b
    export PATH=${HOME}/miniconda/bin:$PATH
    conda update --yes conda
-   conda create --yes -n mdaenv python=2.7 numpy=1.9.2 scipy=0.16 nose=1.3.7 ipython
+   conda create --yes -n mdaenv python=2.7 numpy=1.9.2 scipy=0.16 nose=1.3.7 ipython ipython-notebook ipython-qtconsole
    source activate mdaenv
    conda install --yes python=2.7 cython biopython matplotlib networkx netcdf4
 
@@ -65,3 +65,6 @@ necessary packages:
   <https://github.com/pypa/pip/issues/2984>`_).
 - :program:`conda` will also install the HDF5 and netcdf libraries for you so
   you will have a *full feature* installation of MDAnalysis
+- You will also get `ipython <http://ipython.org>`_ with its Jupyter
+  notebook interface.
+
