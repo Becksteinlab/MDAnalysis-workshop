@@ -24,12 +24,10 @@ with projects during the *hackathon*.
 
 ## Workshop
 
-The workshop session was held by David and Oliver. They live-coded in
-an ipython notebook, following the notes in 
+The workshop session was held by David and Oliver, with the introductory presentation in the *talk* directory (PDF and Keynote 08 format). They live-coded in an ipython notebook, following the notes in 
 
-- [notebooks/MDAnalysis_Workshop_Part_1.ipynb](http://nbviewer.ipython.org/github/Becksteinlab/MDAnalysis-workshop/blob/master/notebooks/MDAnalysis_Workshop_Part_1.ipynb)
--
-[notebooks/MDAnalysis_Workshop_Part_2.ipynb](http://nbviewer.ipython.org/github/Becksteinlab/MDAnalysis-workshop/blob/master/notebooks/MDAnalysis_Workshop_Part_2.ipynb)
+* [notebooks/MDAnalysis_Workshop_Part_1.ipynb](http://nbviewer.ipython.org/github/Becksteinlab/MDAnalysis-workshop/blob/master/notebooks/MDAnalysis_Workshop_Part_1.ipynb)
+* [notebooks/MDAnalysis_Workshop_Part_2.ipynb](http://nbviewer.ipython.org/github/Becksteinlab/MDAnalysis-workshop/blob/master/notebooks/MDAnalysis_Workshop_Part_2.ipynb)
 
 The live-coded notebook was regularly synced to
 [dotsdl/MDAnalysis-workshop-notebook-julich/MDAnalysis Tutorial.ipynb](https://github.com/dotsdl/MDAnalysis-workshop-notebook-julich/MDAnalysis Tutorial.ipynb) (by
