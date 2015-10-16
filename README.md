@@ -22,3 +22,20 @@ David Dotson, Tyler Reddy, Phil Fowler) will be at hand to give an
 introduction to the MDAnalysis Python library and be available to help
 with projects during the *hackathon*.
 
+## Workshop
+
+The workshop session was held by David and Oliver. They live-coded in
+an ipython notebook, following the notes in 
+
+- [notebooks/MDAnalysis_Workshop_Part_1.ipynb](http://nbviewer.ipython.org/github/Becksteinlab/MDAnalysis-workshop/blob/master/notebooks/MDAnalysis_Workshop_Part_1.ipynb)
+-
+[notebooks/MDAnalysis_Workshop_Part_2.ipynb](http://nbviewer.ipython.org/github/Becksteinlab/MDAnalysis-workshop/blob/master/notebooks/MDAnalysis_Workshop_Part_2.ipynb)
+
+The live-coded notebook was regularly synced to
+[dotsdl/MDAnalysis-workshop-notebook-julich/MDAnalysis Tutorial.ipynb](https://github.com/dotsdl/MDAnalysis-workshop-notebook-julich/MDAnalysis Tutorial.ipynb) (by
+running a small `git commit -m "bump" "MDAnalysis Tutorial.ipynb"; git
+push` script from a hotkey (or `cron`), which allowed students to
+catch up by reloading
+[MDAnalysis%20Tutorial.ipynb](http://nbviewer.ipython.org/github/dotsdl/MDAnalysis-workshop-notebook-julich/blob/master/MDAnalysis%20Tutorial.ipynb).
+
+
