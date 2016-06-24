@@ -25,17 +25,15 @@ Trajectory analysis
 
 The notebook `MDAnalysis_Workshop_Part_2.ipynb`_ teaches how to work
 with trajectories. The lesson includes different ways to access and select
-frames and introduces common programming patterns from frame-based
+frames and introduces common programming patterns for frame-based
 analysis, including a range of real-world examples using the
 trajectories from the :ref:`chapter-datadownload` section. 
 
 
-Further reading
-===============
-
-* Have a look at the official `MDAnalysis Tutorial`_.
-* See the `list of other tutorials`_.
-* Join the discussion on the `mdnalysis-discussion mailing list`_. 
+.. SeeAlso::
+   * Have a look at the official `MDAnalysis Tutorial`_.
+   * See the `list of other tutorials`_.
+   * Join the discussion on the `mdnalysis-discussion mailing list`_. 
 
 .. Links
 
