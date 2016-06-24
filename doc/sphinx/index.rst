@@ -59,6 +59,7 @@ Contents
    installation
    testing
    datadownload
+   notebooks
    references
 
 
