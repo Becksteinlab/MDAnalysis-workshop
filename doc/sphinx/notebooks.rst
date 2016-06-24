@@ -30,6 +30,13 @@ analysis, including a range of real-world examples using the
 trajectories from the :ref:`chapter-datadownload` section. 
 
 
+Further reading
+===============
+
+* Have a look at the official `MDAnalysis Tutorial`_.
+* See the `list of other tutorials`_.
+* Join the discussion on the `mdnalysis-discussion mailing list`_. 
+
 .. Links
 
 .. _`@orbeckst`: https://github.com/orbeckst
@@ -43,3 +50,10 @@ trajectories from the :ref:`chapter-datadownload` section.
    http://nbviewer.ipython.org/github/Becksteinlab/MDAnalysis-workshop/blob/master/notebooks/MDAnalysis_Workshop_Part_1.ipynb
 .. _MDAnalysis_Workshop_Part_2.ipynb:
    http://nbviewer.jupyter.org/github/Becksteinlab/MDAnalysis-workshop/blob/master/notebooks/MDAnalysis_Workshop_Part_2.ipynb
+
+
+.. _MDAnalysis Tutorial: http://www.mdanalysis.org/MDAnalysisTutorial/
+.. _`list of other tutorials`:
+   https://github.com/MDAnalysis/mdanalysis/wiki/Tutorials
+.. _`mdnalysis-discussion mailing list`:
+   http://groups.google.com/group/mdnalysis-discussion
