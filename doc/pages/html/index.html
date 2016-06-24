@@ -2,11 +2,11 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>MDAnalysis Tutorial at the 2015 CECAM Macromolecular Simulation Software Workshop &mdash; MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.1 documentation</title>
+    <title>MDAnalysis Tutorial at the 2015 CECAM Macromolecular Simulation Software Workshop &mdash; MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.3 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.0.1',
+        VERSION:     '1.0.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="_static/mdanalysis-logo.ico"/>
-    <link rel="top" title="MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.1 documentation" href="#" />
+    <link rel="top" title="MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.3 documentation" href="#" />
     <link rel="next" title="MDAnalysis installation instructions" href="installation.html" /> 
   </head>
   <body role="document">
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="installation.html" title="MDAnalysis installation instructions"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -72,9 +72,6 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -91,9 +88,13 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Last updated:</th><td class="field-body">October 07, 2015</td>
+<tr class="field-odd field"><th class="field-name">Last updated:</th><td class="field-body">Jun 24, 2016</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Authors:</th><td class="field-body">Oliver Beckstein, David Dotson</td>
+<tr class="field-even field"><th class="field-name">Authors:</th><td class="field-body"><a class="reference external" href="http://becksteinlab.physics.asu.edu/people/11/oliver-beckstein">Oliver Beckstein</a>, <a class="reference external" href="http://becksteinlab.physics.asu.edu/people/19/david-dotson">David Dotson</a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Tutorial:</th><td class="field-body">1.0.3</td>
+</tr>
+<tr class="field-even field"><th class="field-name">MDAnalysis:</th><td class="field-body">≥ 0.11</td>
 </tr>
 </tbody>
 </table>
@@ -110,9 +111,9 @@ during the <em>hackathon</em> on the second day.</p>
 <p>In order to prepare for the tutorial session on Wednesday Oct 14, 2015
 you should</p>
 <ol class="arabic simple">
-<li><a class="reference internal" href="installation.html#chapter-installing-mdanalysis"><span>install MDAnalysis</span></a> (and
+<li><a class="reference internal" href="installation.html#chapter-installing-mdanalysis"><span class="std std-ref">install MDAnalysis</span></a> (and
 its dependencies) on your laptop (Linux or Mac OS X)</li>
-<li><a class="reference internal" href="datadownload.html#chapter-datadownload"><span>download example data</span></a></li>
+<li><a class="reference internal" href="datadownload.html#chapter-datadownload"><span class="std std-ref">download example data</span></a></li>
 </ol>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -129,6 +130,7 @@ people attempting to do the same will almost certainly fail.</p>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">MDAnalysis installation instructions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="testing.html">Testing the installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="datadownload.html">Data Download</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Tutorial Jupyter Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 </div>
@@ -150,12 +152,12 @@ people attempting to do the same will almost certainly fail.</p>
         <li class="right" >
           <a href="installation.html" title="MDAnalysis installation instructions"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.1 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">MDAnalysis @ 2015 CECAM Macromolecular Simulation Software Workshop 1.0.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, Oliver Beckstein, David Dotson.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>

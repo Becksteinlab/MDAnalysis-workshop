@@ -32,7 +32,7 @@ Recent Ubuntu distributions:
 
    sudo apt-get update
    sudo apt-get install -y build-essential python-dev python-setuptools python-pip
-   sudo apt-get install -y python-numpy python-scipy python-matplotlib python-biopython python-networkx ipython
+   sudo apt-get install -y python-numpy python-scipy python-matplotlib python-biopython python-networkx ipython ipython-notebook
    sudo apt-get install -y libhdf5-serial-dev libnetcdf-dev
    
    sudo pip install netCDF4
@@ -48,7 +48,7 @@ Most recent Debian distributions should all work with the following:
 
    sudo apt-get update
    sudo apt-get install -y build-essential python-dev python-setuptools python-pip
-   sudo apt-get install -y python-numpy python-scipy python-matplotlib python-biopython python-networkx ipython
+   sudo apt-get install -y python-numpy python-scipy python-matplotlib python-biopython python-networkx ipython ipython-notebook
    sudo apt-get install -y libhdf5-serial-dev libnetcdf-dev
    
    sudo pip install netCDF4
