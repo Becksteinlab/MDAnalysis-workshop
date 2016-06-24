@@ -5,7 +5,9 @@
 ===================================================================================
 
 :Last updated: |today|
-:Authors: Oliver Beckstein, David Dotson
+:Authors: `Oliver Beckstein`_, `David Dotson`_
+:Tutorial: |release|
+:MDAnalysis: ≥ |MDAnalysis_version|
 
 MDAnalysis_ is an open source Python library that helps you to quickly
 write your own analysis algorithm for studying trajectories produced
@@ -59,6 +61,7 @@ Contents
    installation
    testing
    datadownload
+   notebooks
    references
 
 
