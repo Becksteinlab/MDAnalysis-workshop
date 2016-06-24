@@ -7,6 +7,6 @@ notebooks/*.pdf
 notebooks/*.pdb
 notebooks/*.ndx
 tmp
-
 vm
 sandbox
+doc/pages
